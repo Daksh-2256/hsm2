@@ -242,7 +242,7 @@
       <div id="googleSection">
         <div class="or">OR</div>
 
-        <a href="http://localhost:5000/api/auth/google" class="google-btn">
+        <a href="https://hsm2.onrender.com/api/auth/google" class="google-btn">
           <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo">
           Continue with Google
         </a>
@@ -266,7 +266,7 @@
       const params = new URLSearchParams(window.location.search);
       const role = params.get("role") || "patient"; // default patient
 
-      const url = role === "doctor" ? "http://localhost:5000/api/doctors/login" : "http://localhost:5000/api/users/login";
+      const url = role === "doctor" ? "https://hsm2.onrender.com/api/doctors/login" : "https://hsm2.onrender.com/api/users/login";
 
       const res = await fetch(url, {
         method: "POST",
@@ -323,7 +323,7 @@
   </script>
   <script>
     // Show friendly notice when Google-authenticated account isn't registered
-    (function() {
+    (function () {
       const params = new URLSearchParams(window.location.search);
       if (params.get("error") === "no_user_found") {
         const notice = document.getElementById("noUserNotice");

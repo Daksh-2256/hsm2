@@ -146,7 +146,9 @@
 
             <form id="activateForm">
                 <!-- Step 1: Email + OTP Request -->
-                <label style="font-size:12px;color:var(--text-secondary);margin-bottom:6px;margin-left:14px;display:block">Email Address</label>
+                <label
+                    style="font-size:12px;color:var(--text-secondary);margin-bottom:6px;margin-left:14px;display:block">Email
+                    Address</label>
                 <div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:18px">
                     <div style="flex:1">
                         <input type="email" id="email" placeholder="Enter your registered email" required
@@ -191,7 +193,7 @@
             btn.disabled = true;
 
             try {
-                const res = await fetch('http://localhost:5000/api/users/send-activation-otp', {
+                const res = await fetch('https://hsm2.onrender.com/api/users/send-activation-otp', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email })
@@ -232,7 +234,7 @@
             if (!otp) { window.showToast("error", "Enter OTP"); return; }
 
             try {
-                const res = await fetch('http://localhost:5000/api/users/activate', {
+                const res = await fetch('https://hsm2.onrender.com/api/users/activate', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email: email, otp: otp, password: pass })

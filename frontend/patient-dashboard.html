@@ -725,7 +725,8 @@
             <div class="carousel">
               <div class="item-card">
                 <div class="icon">
-                  <img src="assets/bp_icon.png" alt="B.P" style="height:36px; object-fit:contain; mix-blend-mode:multiply">
+                  <img src="assets/bp_icon.png" alt="B.P"
+                    style="height:36px; object-fit:contain; mix-blend-mode:multiply">
                 </div>
                 <h4>B.P</h4>
                 <p>Headache, dizziness, tiredness, and chest discomfort.</p>
@@ -737,7 +738,8 @@
               </div>
               <div class="item-card">
                 <div class="icon">
-                  <img src="assets/spine_icon.png" alt="Herniated Disc" style="height:36px; object-fit:contain; mix-blend-mode:multiply">
+                  <img src="assets/spine_icon.png" alt="Herniated Disc"
+                    style="height:36px; object-fit:contain; mix-blend-mode:multiply">
                 </div>
                 <h4>Herniated Disc</h4>
                 <p>Back or neck pain, numbness, tingling, and weakness in arms or legs.</p>
@@ -749,7 +751,8 @@
               </div>
               <div class="item-card">
                 <div class="icon">
-                  <img src="assets/pain_icon.png" alt="Pain" style="height:36px; object-fit:contain; mix-blend-mode:multiply">
+                  <img src="assets/pain_icon.png" alt="Pain"
+                    style="height:36px; object-fit:contain; mix-blend-mode:multiply">
                 </div>
                 <h4>Pain</h4>
                 <p>Muscle pain, joint stiffness, and tiredness due to stress, poor posture, or overwork.</p>
@@ -766,7 +769,8 @@
               </button>
             </div>
 
-            <div class="appointments-wrapper" style="background:#fff;border-radius:16px;overflow:visible !important;border:1px solid #f0f0f0">
+            <div class="appointments-wrapper"
+              style="background:#fff;border-radius:16px;overflow:visible !important;border:1px solid #f0f0f0">
               <table style="width:100%;border-collapse:collapse;">
                 <thead style="background:#f9fbf9;border-bottom:1px solid #eef4f1">
                   <tr>
@@ -797,7 +801,8 @@
           <!-- HISTORY -->
           <section id="history" style="display:none">
             <h3 style="color:#155c3b;margin-bottom:20px">Appointment History</h3>
-            <div class="appointments-wrapper" style="background:#fff;border-radius:16px;overflow:hidden;border:1px solid #f0f0f0">
+            <div class="appointments-wrapper"
+              style="background:#fff;border-radius:16px;overflow:hidden;border:1px solid #f0f0f0">
               <table style="width:100%;border-collapse:collapse;">
                 <thead style="background:#f9fbf9;border-bottom:1px solid #eef4f1">
                   <tr>
@@ -854,7 +859,7 @@
   </div>
 
   <script>
-    const API = "http://localhost:5000";
+    const API = "https://hsm2.onrender.com";
     const token = localStorage.getItem("token");
     const user = JSON.parse(localStorage.getItem("user") || "{}");
 
@@ -1130,7 +1135,8 @@
           show('appointments');
 
           const isUndoable = method === 'PUT' && oldRescheduleData && oldRescheduleData.id === rescheduleId;
-          const undoData = isUndoable ? { ...oldRescheduleData
+          const undoData = isUndoable ? {
+            ...oldRescheduleData
           } : null;
 
           window.showToast("success", method === 'PUT' ? "Appointment rescheduled successfully" : "Appointment booked successfully!", {
@@ -1243,8 +1249,8 @@
 
         // Rule 4: Filter total count to exclude Cancelled/Rejected for accurate dashboard view
         const activeAppts = list.filter(a => {
-            const s = (a.status || '').toLowerCase();
-            return s !== 'cancelled' && s !== 'rejected';
+          const s = (a.status || '').toLowerCase();
+          return s !== 'cancelled' && s !== 'rejected';
         });
 
         if (document.getElementById("totalAppts")) document.getElementById("totalAppts").innerText = activeAppts.length;
@@ -1396,11 +1402,11 @@
                   <div style="font-size:12px;text-transform:uppercase;color:#7f9f8e;font-weight:600;letter-spacing:0.5px;margin-bottom:8px">Prescribed Medicines</div>
                     <div style="background:#f8fbf9;padding:14px;border-radius:10px;border-left:3px solid #155c3b">
                       ${medicines.map(m => {
-                        const name = m.medicineName || m.name || 'Unknown Medicine';
-                        const dosage = m.dosage || m.dose || 'As directed';
-                        const duration = m.duration ? ` (${m.duration} days)` : '';
-                        const instr = m.instructions ? `<div style="font-size:12px;color:#6b8a7a;font-style:italic;margin-top:2px">• ${m.instructions}</div>` : '';
-                        return `
+            const name = m.medicineName || m.name || 'Unknown Medicine';
+            const dosage = m.dosage || m.dose || 'As directed';
+            const duration = m.duration ? ` (${m.duration} days)` : '';
+            const instr = m.instructions ? `<div style="font-size:12px;color:#6b8a7a;font-style:italic;margin-top:2px">• ${m.instructions}</div>` : '';
+            return `
                           <div style="margin-bottom:12px;padding-bottom:10px;border-bottom:1px dashed #e0ece6;last-child:{border-bottom:none;margin-bottom:0}">
                             <div style="display:flex;justify-content:space-between;align-items:center">
                               <strong style="color:#155c3b;font-size:15px">${name}</strong>
@@ -1409,7 +1415,7 @@
                             ${instr}
                           </div>
                         `;
-                      }).join('')}
+          }).join('')}
                     </div>
                 </div>
               ` : ''}
@@ -1471,9 +1477,9 @@
           const status = a.status || 'Past';
           let badgeClass = 'status-completed';
           if (status.toLowerCase().includes('cancel') || status.toLowerCase().includes('reject')) {
-              badgeClass = 'status-cancelled';
+            badgeClass = 'status-cancelled';
           }
-          
+
           return `
             <tr style="border-bottom:1px solid #f5f5f5">
               <td style="padding:16px;color:#333">${a.date}</td>

@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Patient Dashboard | Samyak Ayurvedic Hospital</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/toast.js" defer></script>
+  <script src="js/validation.js" defer></script>
+
+  <style>
+    /* CSS Variables for Theme System */
+    :root {
+      /* Light Mode */
+      --bg-main: rgba(255, 255, 255, 0.82);
+      --bg-body: url("assets/hero.jpg") center/cover no-repeat fixed;
+      --bg-card: #fff;
+      --bg-sidebar: #fff;
+      --bg-input: #fff;
+      --bg-modal: rgba(0, 0, 0, 0.4);
+      --bg-primary: #155c3b;
+      --bg-primary-hover: #0d462b;
+      --bg-secondary: #eaf4ee;
+      --bg-tertiary: #f3f8f5;
+      --bg-muted: #f8fbf9;
+      --text-primary: #155c3b;
+      --text-secondary: #4f6f60;
+      --text-muted: #6b8a7a;
+      --text-dark: #2c3e50;
+      --text-label: #7f9f8e;
+      --text-white: #fff;
+      --border-light: #eaf4ee;
+      --border-muted: #f3f8f5;
+      --shadow-card: 0 22px 46px rgba(0, 0, 0, 0.2);
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+      --shadow-hover: 0 10px 25px rgba(21, 92, 59, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    html,
+    body {
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      min-height: 100vh;
+      background: url("assets/hero.jpg") center/cover no-repeat fixed;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(255, 255, 255, .82);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      z-index: -1;
+    }
+
+    /* TOP BAR */
+    .top-bar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: 72px;
+      background: #f3f8f5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, .14);
+      z-index: 5;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      color: #155c3b;
+    }
+
+    .logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .logo img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 18px;
+      color: #155c3b;
+      white-space: nowrap;
+      min-width: 260px;
+    }
+
+    /* DASHBOARD WRAPPER */
+    .dashboard {
+      padding: 120px 24px 40px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .center-wrap {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 32px;
+      width: 100%;
+      align-items: start;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      background: #fff;
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: 0 22px 46px rgba(0, 0, 0, .2);
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 100px;
+      height: calc(100vh - 140px);
+      margin-left: 6px;
+      overflow-y: auto;
+    }
+
+    .sidebar-profile {
+      margin-bottom: 24px;
+    }
+
+    .sidebar-profile h3 {
+      margin-bottom: 8px;
+    }
+
+    .sidebar button {
+      padding: 16px 20px;
+      border: none;
+      border-radius: 16px;
+      background: #eaf4ee;
+      color: #155c3b;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 14px;
+      text-align: center;
+      transition: all .25s ease;
+    }
+
+    .sidebar button:hover {
+      background: #f0f7f4;
+      color: #155c3b;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar button.active {
+      background: #155c3b;
+      color: #fff;
+    }
+
+    .logout-fixed {
+      margin-top: auto;
+      background: #ffecec;
+      color: #b71c1c;
+      border: none;
+      padding: 14px;
+      border-radius: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      transition: .25s;
+    }
+
+    .sidebar .logout-fixed:hover {
+      background: #ffdada;
+      color: #d32f2f;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(211, 47, 47, 0.15);
+    }
+
+    /* MAIN CONTENT */
+    .main {
+      background: #fff;
+      border-radius: 22px;
+      padding: 32px;
+      box-shadow: 0 22px 46px rgba(0, 0, 0, .2);
+      min-height: 600px;
+    }
+
+    /* CARDS */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      margin-bottom: 36px;
+    }
+
+    .card {
+      background: #eaf4ee;
+      padding: 30px;
+      border-radius: 24px;
+      cursor: pointer;
+      transition: .3s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      background: #fff;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    /* PREMIUM BOOK CARD */
+    .book-card {
+      background: linear-gradient(135deg, #1e7e52 0%, #155c3b 100%);
+      position: relative;
+      overflow: hidden;
+      border: none;
+    }
+
+    .book-card h2 {
+      color: #fff;
+      font-size: 32px;
+      margin-bottom: 2px;
+    }
+
+    .book-card p {
+      color: #ffff;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+    }
+
+    .book-card::after {
+      content: '+';
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      font-size: 140px;
+      color: rgba(255, 255, 255, 0.05);
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .book-card:hover {
+      background: linear-gradient(135deg, #104a2f 0%, #0a3822 100%);
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    /* STAT CARDS */
+    .stat-card {
+      background: linear-gradient(135deg, #1e7e52 0%, #155c3b 100%);
+      position: relative;
+      overflow: hidden;
+      border: none;
+    }
+
+    .stat-card h2 {
+      color: #fff;
+      font-size: 36px;
+      margin-bottom: 2px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .stat-card p {
+      color: #eaf4ee;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .stat-card::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      right: -10px;
+      width: 80px;
+      height: 80px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .stat-card:hover {
+      background: linear-gradient(135deg, #155c3b 0%, #0d462b 100%);
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .stat-card:hover h2,
+    .stat-card:hover p {
+      color: #fff;
+    }
+
+    /* SYMPTOMS */
+    .carousel {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding: 20px 10px;
+    }
+
+    .item-card {
+      min-width: 180px;
+      height: 150px;
+      background: #fff;
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+      transition: all .4s cubic-bezier(.175, .885, .32, 1.275);
+    }
+
+    .item-card p {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, #155c3b, #1e8e58);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: translateY(100%);
+      transition: .35s;
+      border-radius: 20px;
+    }
+
+    .item-card:hover {
+      transform: scale(1.12);
+      z-index: 10;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, .18);
+    }
+
+    .item-card .icon {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    .item-card:hover p {
+      transform: translateY(0);
+    }
+
+    /* STATUS BADGES */
+    .status-badge {
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-block;
+    }
+
+    .status-pending {
+      background: #fff8e1;
+      color: #f57f17;
+    }
+
+    .status-confirmed {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .status-completed {
+      background: #1b5e20;
+      color: #fff;
+    }
+
+    .status-cancelled {
+      background: #ffebee;
+      color: #c62828;
+    }
+
+    /* EMPTY STATE */
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: #666;
+    }
+
+    .empty-state button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: #155c3b;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: relative;
+        height: auto;
+        margin-left: 0;
+      }
+    }
+
+    /* BOOKING MODAL */
+    .booking-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      display: none;
+      /* JS toggles flex */
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-content {
+      background: #fff;
+      padding: 30px;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes popIn {
+      from {
+        transform: scale(0.9);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #155c3b;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .form-group input:focus {
+      border-color: #155c3b;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      background: #155c3b;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .btn-submit:hover {
+      background: #104a2f;
+    }
+
+    .btn-action {
+      padding: 10px 18px;
+      background: #155c3b;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: .2s;
+    }
+
+    .btn-action:hover {
+      background: #104a2f;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(21, 92, 59, 0.2);
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+      font-size: 18px;
+      color: #5a7866;
+      background: #f3f8f5;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .close-modal:hover {
+      background: #ffebee;
+      color: #c62828;
+    }
+
+    /* TIME SLOTS GRID */
+    .slots-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .time-slot {
+      padding: 10px;
+      background: #e8f5e9;
+      /* Green tint */
+      color: #155c3b;
+      border: 1px solid #c8e6c9;
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: .2s;
+    }
+
+    .time-slot:hover {
+      background: #c8e6c9;
+    }
+
+    .time-slot.selected {
+      background: #155c3b;
+      color: #fff;
+      border-color: #155c3b;
+      box-shadow: 0 4px 10px rgba(21, 92, 59, 0.3);
+    }
+
+    .time-slot.booked {
+      background: #ffebee;
+      color: #c62828;
+      border-color: #ffcdd2;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+
+    .slot-legend {
+      display: flex;
+      gap: 20px;
+      font-size: 13px;
+      justify-content: center;
+      margin-bottom: 20px;
+      color: #555;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 6px;
+    }
+
+    /* ACTION MENU */
+    .action-menu {
+      position: relative;
+    }
+
+    .action-btn {
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: #888;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    .action-btn:hover {
+      background: #f0f0f0;
+      color: #333;
+    }
+
+    .action-dropdown {
+      position: absolute;
+      right: 0;
+      top: 100%;
+      bottom: auto;
+      background: #fff;
+      border: 1px solid #eee;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      width: 150px;
+      display: none;
+      z-index: 9999;
+      overflow: hidden;
+    }
+
+    .action-dropdown.show {
+      display: block;
+    }
+
+    .action-item {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: #333;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .action-item:hover {
+      background: #f9fbf9;
+      color: #155c3b;
+    }
+
+    .action-item.danger {
+      color: #c62828;
+    }
+
+    .action-item.danger:hover {
+      background: #ffebee;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="overlay"></div>
+
+  <div class="top-bar">
+    <div class="brand">
+      <div class="logo">
+        <img src="assets/logo.png" alt="Samyak Ayurvedic Hospital Logo">
+      </div>
+      <span>Samyak Ayurvedic Hospital</span>
+    </div>
+  </div>
+
+  <div class="dashboard">
+    <div class="center-wrap">
+      <div class="layout">
+
+        <aside class="sidebar">
+          <div class="sidebar-profile" id="sidebarProfile">
+            <!-- JS Loaded -->
+          </div>
+          <button type="button" class="active" data-target="overview" onclick="show('overview')">Dashboard</button>
+          <button type="button" data-target="appointments" onclick="show('appointments')">My Appointments</button>
+          <button type="button" data-target="history" onclick="show('history')">Appointment History</button>
+          <button type="button" data-target="records" onclick="show('records')">Medical Records</button>
+
+          <div class="spacer"></div>
+          <button type="button" class="logout-fixed" onclick="logout()">Logout</button>
+        </aside>
+
+
+
+        <main class="main">
+
+          <!-- OVERVIEW -->
+          <section id="overview">
+            <h2 class="section-title" id="welcomeHeading">Welcome Back</h2>
+            <p style="color:#4f6f60;margin-bottom:28px" id="healthOverviewText">Here is your health overview.</p>
+
+            <div class="cards">
+              <div class="card book-card" onclick="openBookingModal()">
+                <h2>Book</h2>
+                <p>New Appointment</p>
+              </div>
+              <div class="card stat-card" onclick="show('appointments')">
+                <h2 id="totalAppts">0</h2>
+                <p>Appointments</p>
+              </div>
+              <div class="card stat-card" onclick="show('records')">
+                <h2 id="totalPrescriptions">0</h2>
+                <p>Prescriptions</p>
+              </div>
+            </div>
+
+            <h3 style="color:#155c3b;margin-bottom:12px">Check Symptoms</h3>
+            <div class="carousel">
+              <div class="item-card">
+                <div class="icon">
+                  <img src="assets/bp_icon.png" alt="B.P" style="height:36px; object-fit:contain; mix-blend-mode:multiply">
+                </div>
+                <h4>B.P</h4>
+                <p>Headache, dizziness, tiredness, and chest discomfort.</p>
+              </div>
+              <div class="item-card">
+                <div class="icon">🩸</div>
+                <h4>Diabetes</h4>
+                <p>Frequent urination, increased thirst, tiredness, blurred vision, and slow wound healing.</p>
+              </div>
+              <div class="item-card">
+                <div class="icon">
+                  <img src="assets/spine_icon.png" alt="Herniated Disc" style="height:36px; object-fit:contain; mix-blend-mode:multiply">
+                </div>
+                <h4>Herniated Disc</h4>
+                <p>Back or neck pain, numbness, tingling, and weakness in arms or legs.</p>
+              </div>
+              <div class="item-card">
+                <div class="icon">🫀</div>
+                <h4>Blockage</h4>
+                <p>Chest pain, shortness of breath, fatigue, and pain in arm or jaw.</p>
+              </div>
+              <div class="item-card">
+                <div class="icon">
+                  <img src="assets/pain_icon.png" alt="Pain" style="height:36px; object-fit:contain; mix-blend-mode:multiply">
+                </div>
+                <h4>Pain</h4>
+                <p>Muscle pain, joint stiffness, and tiredness due to stress, poor posture, or overwork.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- APPOINTMENTS -->
+          <section id="appointments" style="display:none">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
+              <h3 style="color:#155c3b;font-size:20px">My Appointments</h3>
+              <button onclick="openBookingModal()" class="btn-action">
+                Book New Appointment
+              </button>
+            </div>
+
+            <div class="appointments-wrapper" style="background:#fff;border-radius:16px;overflow:visible !important;border:1px solid #f0f0f0">
+              <table style="width:100%;border-collapse:collapse;">
+                <thead style="background:#f9fbf9;border-bottom:1px solid #eef4f1">
+                  <tr>
+                    <th style="padding:16px;text-align:left;color:#4f6f60;font-size:13px;font-weight:600">Date</th>
+                    <th style="padding:16px;text-align:left;color:#4f6f60;font-size:13px;font-weight:600">Time</th>
+                    <th style="padding:16px;text-align:left;color:#4f6f60;font-size:13px;font-weight:600">Status</th>
+                    <th style="padding:16px;text-align:right;color:#4f6f60;font-size:13px;font-weight:600">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="appointmentsTable">
+                  <tr>
+                    <td colspan="4" style="text-align:center;padding:30px;color:#888;">Loading appointments...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- RECORDS -->
+          <section id="records" style="display:none">
+            <div style="margin-bottom:24px">
+              <h3 style="color:#155c3b;margin-bottom:6px;font-size:22px">Medical Records</h3>
+              <p style="color:#6b8a7a;font-size:14px;margin:0">Your prescriptions and treatment history</p>
+            </div>
+            <div id="prescriptionsContainer" style="display:grid;gap:16px;"></div>
+          </section>
+
+          <!-- HISTORY -->
+          <section id="history" style="display:none">
+            <h3 style="color:#155c3b;margin-bottom:20px">Appointment History</h3>
+            <div class="appointments-wrapper" style="background:#fff;border-radius:16px;overflow:hidden;border:1px solid #f0f0f0">
+              <table style="width:100%;border-collapse:collapse;">
+                <thead style="background:#f9fbf9;border-bottom:1px solid #eef4f1">
+                  <tr>
+                    <th style="padding:16px;text-align:left;color:#4f6f60;font-size:13px;font-weight:600">Date</th>
+                    <th style="padding:16px;text-align:left;color:#4f6f60;font-size:13px;font-weight:600">Time</th>
+                    <th style="padding:16px;text-align:left;color:#4f6f60;font-size:13px;font-weight:600">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="historyTable">
+                  <tr>
+                    <td colspan="3" style="padding:20px;text-align:center;color:#888">Loading history...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+        </main>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- BOOKING MODAL HTML -->
+  <div class="booking-modal" id="bookingModal">
+    <div class="modal-content" style="position:relative">
+      <div class="close-modal" onclick="closeBookingModal()">&times;</div>
+      <h2 style="color:#155c3b;margin-bottom:20px;text-align:center">Book Appointment</h2>
+
+      <form id="bookForm" onsubmit="event.preventDefault(); bookAppointment();">
+        <div class="form-group">
+          <label>Select Date</label>
+          <input type="date" id="bookDate" onchange="loadSlots(this.value)" required>
+        </div>
+
+        <div class="form-group">
+          <label>Select Time Slot</label>
+          <div id="loadingSlots" style="display:none;color:#666;font-size:13px;margin-bottom:10px">Checking
+            availability...</div>
+          <div class="slots-grid" id="slotContainer">
+            <div style="grid-column:1/-1;text-align:center;color:#888;font-size:13px">Please select a date first.</div>
+          </div>
+
+          <div class="slot-legend" id="slotLegend" style="display:none">
+            <div><span class="dot" style="background:#4caf50"></span>Available</div>
+            <div><span class="dot" style="background:#ef5350"></span>Booked</div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-submit">Confirm Booking</button>
+        <p id="bookMsg" class="error-msg"></p>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const API = "http://localhost:5000";
+    const token = localStorage.getItem("token");
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+
+    let selectedTimeSlot = null;
+    let rescheduleId = null;
+
+    // Close action menus
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.action-menu')) {
+        document.querySelectorAll('.action-dropdown').forEach(el => el.classList.remove('show'));
+      }
+    });
+
+    async function loadSlots(date) {
+      const container = document.getElementById('slotContainer');
+      const loader = document.getElementById('loadingSlots');
+      const legend = document.getElementById('slotLegend');
+
+      selectedTimeSlot = null;
+      container.innerHTML = '';
+      if (!date) {
+        container.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:#888;font-size:13px">Please select a date first.</div>';
+        legend.style.display = 'none';
+        return;
+      }
+
+      // Sunday Check
+      const day = new Date(date).getDay();
+      if (day === 0) {
+        container.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:#b71c1c;font-size:14px;font-weight:600;padding:10px;background:#ffecec;border-radius:8px">Hospital is closed on Sundays. Please select another date.</div>';
+        legend.style.display = 'none';
+        return;
+      }
+
+      loader.style.display = 'block';
+      legend.style.display = 'flex';
+
+      try {
+        const res = await fetch(`${API}/api/appointments/slots?date=${date}`, {
+          headers: {
+            "Authorization": "Bearer " + token
+          }
+        });
+        const slots = await res.json(); // Expects array of { time, timeValue, isBooked }
+
+        loader.style.display = 'none';
+
+        if (!Array.isArray(slots) || slots.length === 0) {
+          container.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:#888;font-size:13px">No slots available.</div>';
+          return;
+        }
+
+        slots.forEach(slot => {
+          const el = document.createElement('div');
+          // Use isBooked from API directly
+          el.className = `time-slot ${slot.isBooked ? 'booked' : ''}`;
+          el.innerText = slot.time; // "09:00 AM" from API
+
+          if (!slot.isBooked) {
+            // Select using timeValue ("09:00")
+            el.onclick = () => selectSlot(el, slot.timeValue);
+          }
+          container.appendChild(el);
+        });
+
+      } catch (err) {
+        window.handleError(err, "loadSlots");
+      }
+    }
+
+    function selectSlot(el, time) {
+      document.querySelectorAll('.time-slot.selected').forEach(d => d.classList.remove('selected'));
+      el.classList.add('selected');
+      selectedTimeSlot = time;
+    }
+
+    // ------------- ACTION FUNCTIONS -------------
+    function toggleAction(id) {
+      document.querySelectorAll('.action-dropdown').forEach(el => {
+        if (el.id !== `action-${id}`) el.classList.remove('show');
+      });
+      const menu = document.getElementById(`action-${id}`);
+      if (menu) menu.classList.toggle('show');
+    }
+
+    let oldRescheduleData = null;
+
+    function handleRestriction(id, rawDate, time, type) {
+      try {
+        const appointmentDateTime = new Date(`${rawDate}T${time}`);
+        const now = new Date();
+        const diffInMilliseconds = appointmentDateTime - now;
+        const diffInHours = diffInMilliseconds / (1000 * 60 * 60);
+
+        if (diffInHours < 24) {
+          const actionName = type === 'reschedule' ? 'reschedule' : 'cancel';
+          window.showToast("warning", `You cannot ${actionName} within 24 hours of the appointment.`);
+          return;
+        }
+
+        if (type === 'reschedule') {
+          oldRescheduleData = {
+            id,
+            date: rawDate,
+            time
+          };
+          openReschedule(id, rawDate, time);
+        } else {
+          cancelAppointment(id, rawDate, time);
+        }
+      } catch (e) {
+        window.handleError(e, "Check Restriction");
+      }
+    }
+
+    async function cancelAppointment(id, rawDate, time) {
+      try {
+        const res = await fetch(`${API}/api/appointments/${id}`, {
+          method: 'DELETE',
+          headers: {
+            "Authorization": "Bearer " + token
+          }
+        });
+        const data = await res.json();
+        if (data.success) {
+          fetchAppointments();
+          fetchHistory();
+          window.showToast("success", "Appointment cancelled.", {
+            onUndo: async () => {
+              try {
+                // Restore by "rescheduling" to original slot
+                const r = await fetch(`${API}/api/appointments/${id}/reschedule`, {
+                  method: 'PUT',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                  },
+                  body: JSON.stringify({
+                    date: rawDate,
+                    time: time
+                  })
+                });
+                if ((await r.json()).success) {
+                  fetchAppointments();
+                  fetchHistory();
+                  window.showToast("success", "Action reverted successfully");
+                }
+              } catch (e) {
+                window.handleError(e, "Undo Cancel");
+              }
+            }
+          });
+        } else {
+          window.showToast("error", data.message || "Failed to cancel");
+        }
+      } catch (e) {
+        window.handleError(e, "Cancel Appointment");
+      }
+    }
+
+    function openReschedule(id, rawDate, time) {
+      openBookingModal(); // Resets UI
+      rescheduleId = id;
+
+      // Update UI for Reschedule Mode
+      document.querySelector('#bookingModal h2').innerText = 'Reschedule Appointment';
+      document.querySelector('#bookingModal .btn-submit').innerText = 'Confirm Reschedule';
+
+      // Pre-fill
+      if (rawDate) {
+        const d = new Date(rawDate);
+        const iso = d.toISOString().split('T')[0];
+        document.getElementById('bookDate').value = iso;
+        loadSlots(iso);
+      }
+    }
+
+    async function fetchHistory() {
+      const tbody = document.getElementById('historyTable');
+      if (!tbody) return;
+      tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;padding:20px;color:#888">Loading...</td></tr>';
+
+      try {
+        const res = await fetch(`${API}/api/appointments/history`, {
+          headers: {
+            "Authorization": "Bearer " + token
+          }
+        });
+        const list = await res.json();
+
+        if (!list || list.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;padding:20px;color:#888">No past appointments found.</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = list.map(a => `
+                <tr style="border-bottom:1px solid #f5f5f5">
+                    <td style="padding:16px">${a.date}</td>
+                    <td style="padding:16px">${a.time || '--'}</td>
+                    <td style="padding:16px"><span class="status-badge status-${(a.status || '').toLowerCase()}">${a.status}</span></td>
+                </tr>
+            `).join('');
+
+      } catch (e) {
+        console.error(e);
+        tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;padding:20px;color:#888">No past appointments found.</td></tr>';
+      }
+    }
+
+    // ------------- MODAL FUNCTIONS -------------
+    function openBookingModal() {
+      document.getElementById('bookingModal').style.display = 'flex';
+      selectedTimeSlot = null;
+      rescheduleId = null;
+      document.querySelector('#bookingModal h2').innerText = 'Book Appointment';
+      document.querySelector('#bookingModal .btn-submit').innerText = 'Confirm Booking';
+      document.getElementById('bookDate').value = '';
+      const container = document.getElementById('slotContainer');
+      if (container) {
+        container.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:#888;font-size:13px">Please select a date first.</div>';
+      }
+      const legend = document.getElementById('slotLegend');
+      if (legend) legend.style.display = 'none';
+
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('bookDate').setAttribute('min', today);
+    }
+
+    function closeBookingModal() {
+      document.getElementById('bookingModal').style.display = 'none';
+      document.getElementById('bookMsg').innerText = '';
+    }
+
+    document.getElementById('bookingModal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('bookingModal')) closeBookingModal();
+    });
+
+    async function bookAppointment() {
+      const date = document.getElementById('bookDate').value;
+      const msg = document.getElementById('bookMsg');
+
+      if (!date || !selectedTimeSlot) {
+        msg.innerText = "Please select both date and a valid time slot.";
+        return;
+      }
+      msg.innerText = "Booking...";
+
+      try {
+        const method = rescheduleId ? 'PUT' : 'POST';
+        const url = rescheduleId ? `${API}/api/appointments/${rescheduleId}/reschedule` : `${API}/api/appointments`;
+
+        const payload = {
+          date,
+          time: selectedTimeSlot
+        };
+        if (rescheduleId) {
+          payload.appointmentId = rescheduleId;
+        }
+
+        const res = await fetch(url, {
+          method: method,
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+          },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          closeBookingModal();
+          fetchAppointments();
+          show('appointments');
+
+          const isUndoable = method === 'PUT' && oldRescheduleData && oldRescheduleData.id === rescheduleId;
+          const undoData = isUndoable ? { ...oldRescheduleData
+          } : null;
+
+          window.showToast("success", method === 'PUT' ? "Appointment rescheduled successfully" : "Appointment booked successfully!", {
+            onUndo: isUndoable ? async () => {
+              try {
+                await fetch(`${API}/api/appointments/${undoData.id}/reschedule`, {
+                  method: 'PUT',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                  },
+                  body: JSON.stringify({
+                    date: undoData.date,
+                    time: undoData.time
+                  })
+                });
+                fetchAppointments();
+                window.showToast("success", "Action reverted successfully");
+              } catch (e) {
+                window.handleError(e, "Undo Reschedule");
+              }
+            } : null
+          });
+
+          oldRescheduleData = null;
+          rescheduleId = null;
+        } else {
+          msg.innerText = data.message || "Booking failed.";
+          if (res.status === 409) {
+            loadSlots(date);
+          }
+        }
+      } catch (e) {
+        window.handleError(e, "Booking");
+      }
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("token")) {
+      localStorage.setItem("token", params.get("token"));
+      localStorage.setItem("user", decodeURIComponent(params.get("user")));
+      window.location.href = "patient-dashboard.html";
+    }
+
+    if (!localStorage.getItem("token") || user.role !== "patient") {
+      if (!params.get("token")) window.location.href = "login.html";
+    }
+
+    if (document.getElementById("headerProfile")) {
+      // CHANGE 3: COMPLETE REMOVAL OF HEADER CONTENT
+      document.getElementById("headerProfile").innerHTML = '';
+    }
+
+    if (document.getElementById("sidebarProfile")) {
+      document.getElementById("sidebarProfile").innerHTML = `
+           <h3 style="color:#155c3b">${user.name || 'Patient'}</h3>
+           <p style="font-size:13px;color:#4f6f60">ID: ${user._id ? user._id.slice(-6).toUpperCase() : '---'}</p>
+       `;
+    }
+
+    // CHANGE 2: WELCOME MESSAGE LOGIC
+    if (document.getElementById("welcomeHeading")) {
+      const hasLoggedIn = localStorage.getItem("hasLoggedInBefore");
+      const name = user.name || user.firstName || 'Patient';
+
+      if (!hasLoggedIn) {
+        // First time
+        document.getElementById("welcomeHeading").textContent = `Welcome, ${name}`;
+        localStorage.setItem("hasLoggedInBefore", "true");
+      } else {
+        // Returning
+        document.getElementById("welcomeHeading").textContent = `Welcome back, ${name}`;
+      }
+    }
+
+    function show(id) {
+      if (id === 'history') fetchHistory();
+      ["overview", "appointments", "records", "history"].forEach(v => {
+        const el = document.getElementById(v);
+        if (el) el.style.display = "none";
+      });
+      const target = document.getElementById(id);
+      if (target) target.style.display = "block";
+
+      document.querySelectorAll(".sidebar button[data-target]").forEach(b => {
+        b.classList.toggle("active", b.dataset.target === id);
+      });
+    }
+
+    function logout() {
+      localStorage.clear();
+      window.location.href = "index.html";
+    }
+
+    async function fetchAppointments() {
+      try {
+        const res = await fetch(`${API}/api/appointments/patient`, {
+          headers: {
+            "Authorization": "Bearer " + token
+          }
+        });
+
+        if (!res.ok) {
+          const tbody = document.getElementById("appointmentsTable");
+          if (tbody) tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:20px;color:red">Error loading appointments.</td></tr>';
+          return;
+        }
+
+        const list = await res.json();
+
+        // Rule 4: Filter total count to exclude Cancelled/Rejected for accurate dashboard view
+        const activeAppts = list.filter(a => {
+            const s = (a.status || '').toLowerCase();
+            return s !== 'cancelled' && s !== 'rejected';
+        });
+
+        if (document.getElementById("totalAppts")) document.getElementById("totalAppts").innerText = activeAppts.length;
+
+        const tbody = document.getElementById("appointmentsTable");
+        if (!tbody) return;
+
+        if (!list || list.length === 0) {
+          tbody.innerHTML = `
+            <tr>
+                <td colspan="4">
+                    <div class="empty-state">
+                        <div style="font-size:48px;margin-bottom:10px">📅</div>
+                        <p>No appointments found.</p>
+                    </div>
+                </td>
+            </tr>
+          `;
+          return;
+        }
+
+        tbody.innerHTML = list.map(a => {
+          const status = a.status || 'Pending';
+          let badgeClass = 'status-pending';
+          let displayStatus = status;
+
+          // Handle all status variations
+          const statusLower = status.toLowerCase();
+          if (statusLower === 'approved' || statusLower === 'confirmed') {
+            badgeClass = 'status-confirmed';
+            displayStatus = 'Confirmed';
+          } else if (statusLower === 'completed') {
+            badgeClass = 'status-completed';
+            displayStatus = 'Completed';
+          } else if (statusLower === 'cancelled') {
+            badgeClass = 'status-cancelled';
+            displayStatus = 'Cancelled';
+          } else if (statusLower === 'rejected') {
+            badgeClass = 'status-cancelled';
+            displayStatus = 'Rejected';
+          } else if (statusLower === 'pending') {
+            badgeClass = 'status-pending';
+            displayStatus = 'Pending';
+          }
+
+          // MANDATORY FIX: ALWAYS render Reschedule and Cancel buttons
+          // The 24-hour check is handled in handleRestriction()
+          const actionButtons = `
+              <button class="action-item reschedule-btn" onclick="handleRestriction('${a._id}', '${a.rawDate || ""}', '${a.time}', 'reschedule')">Reschedule</button>
+              <button class="action-item cancel-btn" onclick="handleRestriction('${a._id}', '${a.rawDate || ""}', '${a.time}', 'cancel')">Cancel</button>
+          `;
+
+          return `
+        <tr style="border-bottom:1px solid #f5f5f5;transition:background .2s">
+          <td style="padding:16px;color:#333;font-weight:500">${a.date}</td>
+          <td style="padding:16px;color:#555">${a.time}</td>
+          <td style="padding:16px;">
+            <span class="status-badge ${badgeClass}">${displayStatus}</span>
+          </td>
+          <td style="padding:16px;text-align:right">
+             <div class="action-menu">
+                <button class="action-btn" onclick="toggleAction('${a._id}')">⋮</button>
+                <div id="action-${a._id}" class="action-dropdown">
+                    ${actionButtons}
+                </div>
+             </div>
+          </td>
+        </tr>
+        `;
+        }).join("");
+      } catch (e) {
+        console.error(e);
+        const tbody = document.getElementById("appointmentsTable");
+        if (tbody) tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:20px;color:red">Unable to connect to server.</td></tr>';
+      }
+    }
+
+    async function fetchPrescriptions() {
+      try {
+        const res = await fetch(`${API}/api/prescriptions`, {
+          headers: {
+            "Authorization": "Bearer " + token
+          }
+        });
+
+        if (!res.ok) {
+          throw new Error('Failed to fetch prescriptions');
+        }
+
+        const list = await res.json();
+        if (document.getElementById("totalPrescriptions")) document.getElementById("totalPrescriptions").innerText = list.length || 0;
+
+        const con = document.getElementById("prescriptionsContainer");
+        if (!con) return;
+
+        // Empty state
+        if (!list || list.length === 0) {
+          con.innerHTML = `
+            <div style="text-align:center;padding:60px 20px;background:#f9fbf9;border-radius:16px;border:2px dashed #e0ece6">
+              <div style="font-size:48px;margin-bottom:16px">🧾</div>
+              <h4 style="color:#155c3b;margin:0 0 8px 0;font-size:18px">No medical records found</h4>
+              <p style="color:#6b8a7a;margin:0;font-size:14px">Your prescriptions will appear here after consultation</p>
+            </div>
+          `;
+          return;
+        }
+
+        // Render prescription cards
+        con.innerHTML = list.map(p => {
+          const visitDate = p.createdAt ? new Date(p.createdAt).toLocaleDateString('en-IN', {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric'
+          }) : 'N/A';
+
+          const doctorName = p.doctorName || 'Dr. Rajan Karangiya';
+          const diagnosis = p.diagnosis || 'General Consultation';
+          const medicines = p.medicines || [];
+          const notes = p.notes || '';
+
+          return `
+            <div style="background:#fff;padding:24px;border-radius:16px;border:1px solid #e8f0ed;box-shadow:0 2px 8px rgba(0,0,0,0.04);transition:transform 0.2s,box-shadow 0.2s" 
+                 onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 16px rgba(0,0,0,0.08)'" 
+                 onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 2px 8px rgba(0,0,0,0.04)'">
+              
+              <!-- Header: Date and Doctor -->
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid #f0f5f2">
+                <div style="display:flex;align-items:center;gap:8px">
+                  <span style="font-size:20px">📅</span>
+                  <span style="font-weight:600;color:#155c3b;font-size:15px">${visitDate}</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:6px">
+                  <span style="font-size:16px">👨‍⚕️</span>
+                  <span style="color:#4f6f60;font-size:14px;font-weight:500">${doctorName}</span>
+                </div>
+              </div>
+              
+              <!-- Diagnosis -->
+              <div style="margin-bottom:16px">
+                <div style="font-size:12px;text-transform:uppercase;color:#7f9f8e;font-weight:600;letter-spacing:0.5px;margin-bottom:6px">Diagnosis</div>
+                <div style="display:inline-block;background:#e8f5e9;color:#155c3b;padding:6px 12px;border-radius:20px;font-size:14px;font-weight:600;border:1px solid #c8e6c9">
+                  ${diagnosis}
+                </div>
+              </div>
+              
+              <!-- Medicines List -->
+              ${medicines.length > 0 ? `
+                <div style="margin-bottom:${notes ? '16px' : '0'}">
+                  <div style="font-size:12px;text-transform:uppercase;color:#7f9f8e;font-weight:600;letter-spacing:0.5px;margin-bottom:8px">Prescribed Medicines</div>
+                    <div style="background:#f8fbf9;padding:14px;border-radius:10px;border-left:3px solid #155c3b">
+                      ${medicines.map(m => {
+                        const name = m.medicineName || m.name || 'Unknown Medicine';
+                        const dosage = m.dosage || m.dose || 'As directed';
+                        const duration = m.duration ? ` (${m.duration} days)` : '';
+                        const instr = m.instructions ? `<div style="font-size:12px;color:#6b8a7a;font-style:italic;margin-top:2px">• ${m.instructions}</div>` : '';
+                        return `
+                          <div style="margin-bottom:12px;padding-bottom:10px;border-bottom:1px dashed #e0ece6;last-child:{border-bottom:none;margin-bottom:0}">
+                            <div style="display:flex;justify-content:space-between;align-items:center">
+                              <strong style="color:#155c3b;font-size:15px">${name}</strong>
+                              <span style="font-size:13px;color:#4f6f60;background:#eaf4ee;padding:2px 8px;border-radius:6px">${dosage}${duration}</span>
+                            </div>
+                            ${instr}
+                          </div>
+                        `;
+                      }).join('')}
+                    </div>
+                </div>
+              ` : ''}
+              
+              <!-- Notes (if available) -->
+              ${notes ? `
+                <div style="margin-bottom:20px">
+                  <div style="font-size:12px;text-transform:uppercase;color:#7f9f8e;font-weight:600;letter-spacing:0.5px;margin-bottom:6px">Additional Notes</div>
+                  <div style="color:#4f6f60;font-size:14px;line-height:1.6;font-style:italic;background:#fffef5;padding:12px;border-radius:8px;border-left:3px solid #f9a825">
+                    ${notes}
+                  </div>
+                </div>
+              ` : ''}
+ 
+              <!-- DOWNLOAD ACTION -->
+              ${p.pdfPath ? `
+                <div style="text-align:right; border-top: 1px solid #f0f5f2; padding-top:16px; margin-top:4px">
+                    <button class="btn-download" onclick="downloadPrescription('${p._id}', this)" 
+                            style="background:#eaf4ee; color:#155c3b; border:none; padding:10px 20px; border-radius:12px; font-weight:700; font-size:13px; cursor:pointer; transition:0.2s; display:inline-flex; align-items:center; gap:8px">
+                        <span>⬇</span> Download Prescription (PDF)
+                    </button>
+                </div>
+              ` : ''}
+              
+            </div>
+          `;
+        }).join("");
+
+      } catch (e) {
+        console.error('Error fetching prescriptions:', e);
+        const con = document.getElementById("prescriptionsContainer");
+        if (con) {
+          con.innerHTML = `
+            <div style="text-align:center;padding:40px 20px;background:#fff5f5;border-radius:16px;border:1px solid #ffcdd2">
+              <div style="font-size:40px;margin-bottom:12px">⚠️</div>
+              <p style="color:#c62828;margin:0;font-size:15px">Unable to load medical records. Please try again later.</p>
+            </div>
+          `;
+        }
+      }
+    }
+
+    async function fetchHistory() {
+      try {
+        const res = await fetch(`${API}/api/appointments/history`, {
+          headers: { "Authorization": "Bearer " + token }
+        });
+        if (!res.ok) return;
+        const list = await res.json();
+        const tbody = document.getElementById("historyTable");
+        if (!tbody) return;
+
+        if (!list || list.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;padding:20px;color:#888">No appointment history found.</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = list.map(a => {
+          const status = a.status || 'Past';
+          let badgeClass = 'status-completed';
+          if (status.toLowerCase().includes('cancel') || status.toLowerCase().includes('reject')) {
+              badgeClass = 'status-cancelled';
+          }
+          
+          return `
+            <tr style="border-bottom:1px solid #f5f5f5">
+              <td style="padding:16px;color:#333">${a.date}</td>
+              <td style="padding:16px;color:#555">${a.time}</td>
+              <td style="padding:16px"><span class="status-badge ${badgeClass}">${status}</span></td>
+            </tr>
+          `;
+        }).join("");
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    async function downloadPrescription(id, btn) {
+      const originalText = btn.innerHTML;
+      btn.innerHTML = "Downloading...";
+      btn.disabled = true;
+
+      try {
+        const res = await fetch(`${API}/api/prescriptions/${id}/download`, {
+          headers: {
+            "Authorization": "Bearer " + token
+          }
+        });
+
+        if (!res.ok) throw new Error("File not available yet.");
+        window.showToast("info", "PDF download started");
+
+        const blob = await res.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = `Prescription_${id}.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+      } catch (e) {
+        window.handleError(e, "Download Prescription");
+      } finally {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }
+    }
+
+    fetchAppointments();
+    fetchPrescriptions();
+  </script>
+</body>
+
+</html>

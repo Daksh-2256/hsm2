@@ -3,7 +3,7 @@ function login() {
   const password = document.getElementById("password").value;
   const role = new URLSearchParams(window.location.search).get("role");
 
-  const url = role === 'doctor' ? 'https://hsm2.onrender.com/api/doctors/login' : 'https://hsm2.onrender.com/api/users/login';
+  const url = role === 'doctor' ? 'https://hsm2-production.up.railway.app/api/doctors/login' : 'https://hsm2-production.up.railway.app/api/users/login';
 
   fetch(url, {
     method: "POST",
@@ -53,7 +53,7 @@ function registerUser() {
     return;
   }
 
-  fetch("https://hsm2.onrender.com/api/users/register", {
+  fetch("https://hsm2-production.up.railway.app/api/users/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

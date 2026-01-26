@@ -258,7 +258,7 @@
       <div class="or">OR</div>
 
       <!-- GOOGLE REGISTER -->
-      <a href="https://hsm2.onrender.com/api/auth/google" class="google-btn">
+      <a href="https://hsm2-production.up.railway.app/api/auth/google" class="google-btn">
         <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo">
         Continue with Google
       </a>
@@ -352,7 +352,7 @@
 
       try {
         // start registration and send OTP
-        const res = await fetch("https://hsm2.onrender.com/api/users/register-init", {
+        const res = await fetch("https://hsm2-production.up.railway.app/api/users/register-init", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -389,7 +389,7 @@
       }
 
       try {
-        const res = await fetch("https://hsm2.onrender.com/api/users/verify-otp", {
+        const res = await fetch("https://hsm2-production.up.railway.app/api/users/verify-otp", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -433,7 +433,7 @@
       }
 
       try {
-        const res = await fetch("https://hsm2.onrender.com/api/users/resend-otp", {
+        const res = await fetch("https://hsm2-production.up.railway.app/api/users/resend-otp", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"

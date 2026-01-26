@@ -4,7 +4,7 @@ const transporter = require("./email");
 module.exports = async (email, token, host) => {
   // Construct activation link (Assuming standard Live Server port 5500 or similar)
   // Adjust path based on where frontend files are served
-  const baseUrl = process.env.FRONTEND_URL || 'http://127.0.0.1:5501';
+  const baseUrl = process.env.FRONTEND_URL || 'https://hsm2-production.up.railway.app';
   const link = `${baseUrl}/hospital-management-system/frontend/activate.html?token=${token}&email=${email}`;
 
   try {

@@ -7,8 +7,8 @@ if (!userId || !role) {
 
 const url =
   role === "doctor"
-    ? `https://hsm2.onrender.com/api/dashboard/doctor/${userId}`
-    : `https://hsm2.onrender.com/api/dashboard/patient/${userId}`;
+    ? `https://hsm2-production.up.railway.app/api/dashboard/doctor/${userId}`
+    : `https://hsm2-production.up.railway.app/api/dashboard/patient/${userId}`;
 
 fetch(url)
   .then(res => res.json())

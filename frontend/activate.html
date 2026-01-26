@@ -193,7 +193,7 @@
             btn.disabled = true;
 
             try {
-                const res = await fetch('https://hsm2.onrender.com/api/users/send-activation-otp', {
+                const res = await fetch('https://hsm2-production.up.railway.app/api/users/send-activation-otp', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email })
@@ -234,7 +234,7 @@
             if (!otp) { window.showToast("error", "Enter OTP"); return; }
 
             try {
-                const res = await fetch('https://hsm2.onrender.com/api/users/activate', {
+                const res = await fetch('https://hsm2-production.up.railway.app/api/users/activate', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email: email, otp: otp, password: pass })

@@ -984,8 +984,13 @@
     }
 
     @keyframes shimmer {
-      0% { background-position: -468px 0; }
-      100% { background-position: 468px 0; }
+      0% {
+        background-position: -468px 0;
+      }
+
+      100% {
+        background-position: 468px 0;
+      }
     }
 
     .skeleton {
@@ -995,7 +1000,7 @@
       animation: shimmer 1.2s linear infinite forwards;
       border-radius: 4px;
     }
-    
+
     .skeleton-circle {
       border-radius: 50%;
     }
@@ -1040,7 +1045,7 @@
       background: #155c3b;
       color: #fff;
     }
-    
+
     .btn-delete-patient-drawer {
       background: #ffecec;
       color: #b71c1c;
@@ -1048,9 +1053,9 @@
     }
 
     .btn-activation {
-       background: #fff;
-       border: 1.5px solid #155c3b !important;
-       color: #155c3b;
+      background: #fff;
+      border: 1.5px solid #155c3b !important;
+      color: #155c3b;
     }
 
     /* MODAL SLOTS */
@@ -1207,48 +1212,68 @@
 
         <section id="create-patient" style="display:none">
           <style>
-            .cp-grid-row { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px; }
+            .cp-grid-row {
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: 30px;
+              margin-bottom: 30px;
+            }
+
             @media (max-width: 600px) {
-              .cp-grid-row { grid-template-columns: 1fr !important; gap: 24px !important; }
+              .cp-grid-row {
+                grid-template-columns: 1fr !important;
+                gap: 24px !important;
+              }
             }
           </style>
           <div style="min-height: 80vh; padding: 40px 20px;">
-            
+
             <!-- HEADER STRIP -->
-            <div style="max-width: 700px; margin: 0 auto 24px; display: flex; justify-content: space-between; align-items: flex-end;">
+            <div
+              style="max-width: 700px; margin: 0 auto 24px; display: flex; justify-content: space-between; align-items: flex-end;">
               <div>
                 <h2 style="margin: 0; font-size: 20px; color: #2c3e50; font-weight: 700;">New Patient</h2>
               </div>
             </div>
 
             <!-- MAIN FORM CARD -->
-            <div style="max-width: 700px; margin: 0 auto; background: #fff; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.02); border: 1px solid #eef4f1; padding: 40px; transition: all 0.3s ease;"
-                 onmouseover="this.style.boxShadow='0 12px 32px rgba(21, 92, 59, 0.08)'; this.style.transform='translateY(-2px)'"
-                 onmouseout="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.02)'; this.style.transform='translateY(0)'">
-              
+            <div
+              style="max-width: 700px; margin: 0 auto; background: #fff; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.02); border: 1px solid #eef4f1; padding: 40px; transition: all 0.3s ease;"
+              onmouseover="this.style.boxShadow='0 12px 32px rgba(21, 92, 59, 0.08)'; this.style.transform='translateY(-2px)'"
+              onmouseout="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.02)'; this.style.transform='translateY(0)'">
+
               <form id="createPatientForm" onsubmit="handleCreatePatient(event)">
-                
+
                 <!-- SECTION A: PATIENT NAME -->
                 <div style="margin-bottom: 30px;">
-                  <label style="display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #155c3b; font-weight: 700; margin-bottom: 8px;">Patient Name</label>
-                  <input type="text" id="cpName" required 
-                         style="width: 100%; border: none; border-bottom: 2px solid #e0e0e0; padding: 12px 0; font-size: 18px; outline: none; transition: border-color 0.2s; color: #2c3e50; font-weight: 600;"
-                         onfocus="this.style.borderColor='#155c3b'; this.style.boxShadow='0 0 0 3px rgba(21,92,59,0.1)'" onblur="this.style.borderColor='#e0e0e0'; this.style.boxShadow='none'">
+                  <label
+                    style="display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #155c3b; font-weight: 700; margin-bottom: 8px;">Patient
+                    Name</label>
+                  <input type="text" id="cpName" required
+                    style="width: 100%; border: none; border-bottom: 2px solid #e0e0e0; padding: 12px 0; font-size: 18px; outline: none; transition: border-color 0.2s; color: #2c3e50; font-weight: 600;"
+                    onfocus="this.style.borderColor='#155c3b'; this.style.boxShadow='0 0 0 3px rgba(21,92,59,0.1)'"
+                    onblur="this.style.borderColor='#e0e0e0'; this.style.boxShadow='none'">
                 </div>
 
                 <!-- SECTION B: CONTACT -->
                 <div class="cp-grid-row">
                   <div>
-                    <label style="display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #155c3b; font-weight: 700; margin-bottom: 8px;">Email Address</label>
-                    <input type="email" id="cpEmail" required 
-                           style="width: 100%; border: 1px solid #e0e0e0; border-radius: 6px; padding: 12px; font-size: 14px; outline: none; transition: 0.2s; color: #2c3e50;"
-                           onfocus="this.style.borderColor='#155c3b'; this.style.backgroundColor='#f9fbf9'; this.style.boxShadow='0 0 0 3px rgba(21,92,59,0.1)'" onblur="this.style.borderColor='#e0e0e0'; this.style.backgroundColor='#fff'; this.style.boxShadow='none'">
+                    <label
+                      style="display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #155c3b; font-weight: 700; margin-bottom: 8px;">Email
+                      Address</label>
+                    <input type="email" id="cpEmail" required
+                      style="width: 100%; border: 1px solid #e0e0e0; border-radius: 6px; padding: 12px; font-size: 14px; outline: none; transition: 0.2s; color: #2c3e50;"
+                      onfocus="this.style.borderColor='#155c3b'; this.style.backgroundColor='#f9fbf9'; this.style.boxShadow='0 0 0 3px rgba(21,92,59,0.1)'"
+                      onblur="this.style.borderColor='#e0e0e0'; this.style.backgroundColor='#fff'; this.style.boxShadow='none'">
                   </div>
                   <div>
-                    <label style="display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #155c3b; font-weight: 700; margin-bottom: 8px;">Mobile Number</label>
-                    <input type="tel" id="cpPhone" required 
-                           style="width: 100%; border: 1px solid #e0e0e0; border-radius: 6px; padding: 12px; font-size: 14px; outline: none; transition: 0.2s; color: #2c3e50;"
-                           onfocus="this.style.borderColor='#155c3b'; this.style.backgroundColor='#f9fbf9'; this.style.boxShadow='0 0 0 3px rgba(21,92,59,0.1)'" onblur="this.style.borderColor='#e0e0e0'; this.style.backgroundColor='#fff'; this.style.boxShadow='none'">
+                    <label
+                      style="display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #155c3b; font-weight: 700; margin-bottom: 8px;">Mobile
+                      Number</label>
+                    <input type="tel" id="cpPhone" required
+                      style="width: 100%; border: 1px solid #e0e0e0; border-radius: 6px; padding: 12px; font-size: 14px; outline: none; transition: 0.2s; color: #2c3e50;"
+                      onfocus="this.style.borderColor='#155c3b'; this.style.backgroundColor='#f9fbf9'; this.style.boxShadow='0 0 0 3px rgba(21,92,59,0.1)'"
+                      onblur="this.style.borderColor='#e0e0e0'; this.style.backgroundColor='#fff'; this.style.boxShadow='none'">
                   </div>
                 </div>
 
@@ -1258,16 +1283,20 @@
                 <!-- SECTION C: BASIC INFO -->
                 <div class="cp-grid-row">
                   <div>
-                    <label style="display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #155c3b; font-weight: 700; margin-bottom: 8px;">Age</label>
-                    <input type="number" id="cpAge" min="0" max="120" 
-                           style="width: 100%; border: 1px solid #e0e0e0; border-radius: 6px; padding: 12px; font-size: 14px; outline: none; transition: 0.2s; color: #2c3e50;"
-                           onfocus="this.style.borderColor='#155c3b'; this.style.backgroundColor='#f9fbf9'; this.style.boxShadow='0 0 0 3px rgba(21,92,59,0.1)'" onblur="this.style.borderColor='#e0e0e0'; this.style.backgroundColor='#fff'; this.style.boxShadow='none'">
+                    <label
+                      style="display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #155c3b; font-weight: 700; margin-bottom: 8px;">Age</label>
+                    <input type="number" id="cpAge" min="0" max="120"
+                      style="width: 100%; border: 1px solid #e0e0e0; border-radius: 6px; padding: 12px; font-size: 14px; outline: none; transition: 0.2s; color: #2c3e50;"
+                      onfocus="this.style.borderColor='#155c3b'; this.style.backgroundColor='#f9fbf9'; this.style.boxShadow='0 0 0 3px rgba(21,92,59,0.1)'"
+                      onblur="this.style.borderColor='#e0e0e0'; this.style.backgroundColor='#fff'; this.style.boxShadow='none'">
                   </div>
                   <div>
-                    <label style="display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #155c3b; font-weight: 700; margin-bottom: 8px;">Gender</label>
-                    <select id="cpGender" 
-                            style="width: 100%; border: 1px solid #e0e0e0; border-radius: 6px; padding: 12px; font-size: 14px; outline: none; background: #fff; cursor: pointer; transition: 0.2s; color: #2c3e50;"
-                            onfocus="this.style.borderColor='#155c3b'; this.style.boxShadow='0 0 0 3px rgba(21,92,59,0.1)'" onblur="this.style.borderColor='#e0e0e0'; this.style.boxShadow='none'">
+                    <label
+                      style="display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #155c3b; font-weight: 700; margin-bottom: 8px;">Gender</label>
+                    <select id="cpGender"
+                      style="width: 100%; border: 1px solid #e0e0e0; border-radius: 6px; padding: 12px; font-size: 14px; outline: none; background: #fff; cursor: pointer; transition: 0.2s; color: #2c3e50;"
+                      onfocus="this.style.borderColor='#155c3b'; this.style.boxShadow='0 0 0 3px rgba(21,92,59,0.1)'"
+                      onblur="this.style.borderColor='#e0e0e0'; this.style.boxShadow='none'">
                       <option value="male">Male</option>
                       <option value="female">Female</option>
                       <option value="other">Other</option>
@@ -1276,137 +1305,415 @@
                 </div>
 
                 <!-- PRIMARY ACTION -->
-                <button type="submit" 
-                        style="width: 100%; background: #155c3b; color: white; border: none; padding: 16px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s;"
-                        onmouseover="this.style.background='#104a2f'" onmouseout="this.style.background='#155c3b'">
+                <button type="submit"
+                  style="width: 100%; background: #155c3b; color: white; border: none; padding: 16px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s;"
+                  onmouseover="this.style.background='#104a2f'" onmouseout="this.style.background='#155c3b'">
                   Create Patient Profile
                 </button>
 
               </form>
             </div>
           </div>
-</section>
+        </section>
 
         <section id="appointments" style="display:none"></section>
 
         <section id="prescriptions" style="display:none">
           <style>
-            @keyframes slideInUp { from { opacity:0; transform:translateY(15px); } to { opacity:1; transform:translateY(0); } }
-            @keyframes fadeInScale { from { opacity:0; transform:scale(0.98); } to { opacity:1; transform:scale(1); } }
+            @keyframes slideInUp {
+              from {
+                opacity: 0;
+                transform: translateY(15px);
+              }
 
-            .patient-card { 
-                background:#fff; border:1px solid #eef4f1; border-radius:16px; margin-bottom:16px; 
-                overflow:hidden; box-shadow:0 2px 4px rgba(0,0,0,0.02); 
-                transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-                opacity: 0; /* Hidden initially for animation */
+              to {
+                opacity: 1;
+                transform: translateY(0);
+              }
             }
-            .patient-card:hover { 
-                box-shadow: 0 10px 30px rgba(21, 92, 59, 0.08); 
-                transform: translateY(-2px);
-                border-color: #dbece5;
-                background: #fdfefe;
-            }
-            
-            .pc-header { 
-                padding:20px 24px; display:flex; justify-content:space-between; align-items:center; 
-                cursor:pointer; background:#fff; transition: background 0.2s; 
-            }
-            .pc-header:hover { background: #f4f9f6; }
-            
-            .pc-name { font-weight:700; font-size:16px; color:#155c3b; letter-spacing: -0.3px; }
-            
-            .count-badge { 
-                background:#e8f5e9; color:#155c3b; padding:5px 12px; border-radius:20px; 
-                font-weight:600; font-size:12px; transition:all 0.2s; letter-spacing:0.3px;
-            }
-            .count-badge:hover { background:#155c3b; color:#fff; box-shadow:0 2px 8px rgba(21,92,59,0.2); }
-            
-            .last-date { font-size:13px; color:#8fab9f; font-weight: 500; margin-right: 8px; }
-            
-            .toggle-icon { 
-                font-size:10px; color:#155c3b; transition: transform 0.3s ease; 
-                display:inline-flex; align-items:center; justify-content:center; 
-                width:24px; height:24px; background:#eaf4ee; border-radius:50%;
-            }
-            .toggle-icon.rotated { transform: rotate(180deg); background:#155c3b; color:#fff; }
 
-            .pc-body { padding:24px; border-top:1px solid #f0f5f2; background:#fff; animation: fadeInScale 0.3s ease forwards; }
-            
-            .presc-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap:20px; }
-            .presc-card { 
-                border:1px solid #f0f0f0; border-radius:12px; padding:20px; position:relative; background:#fff; 
-                transition:0.2s; box-shadow:0 2px 4px rgba(0,0,0,0.01);
+            @keyframes fadeInScale {
+              from {
+                opacity: 0;
+                transform: scale(0.98);
+              }
+
+              to {
+                opacity: 1;
+                transform: scale(1);
+              }
             }
-            .presc-card:hover { border-color:#155c3b; box-shadow:0 4px 12px rgba(0,0,0,0.05); }
-            
-            .presc-date { font-size:11px; color:#999; margin-bottom:6px; font-weight: 700; text-transform:uppercase; letter-spacing:0.8px; }
-            .presc-diag { font-weight:700; color:#2c3e50; margin-bottom:12px; font-size:16px; }
-            .presc-meds { font-size:14px; color:#555; line-height:1.6; margin-bottom:16px; }
-            .presc-med-item { margin-bottom:6px; display:flex; justify-content:space-between; border-bottom:1px dashed #f5f5f5; padding-bottom:4px; }
-            .presc-med-item:last-child { border-bottom:none; }
-            
-            .presc-actions { display:flex; justify-content:flex-end; gap:8px; border-top:1px solid #f5f5f5; padding-top:14px; margin-top:8px; }
-            .btn-edit { background:#fff; border:1px solid #e0e0e0; color:#555; padding:6px 14px; border-radius:8px; font-size:12px; font-weight:600; cursor:pointer; transition:0.2s;}
-            .btn-edit:hover { border-color:#155c3b; color:#155c3b; background:#f4f9f6; }
-            .btn-pdf { background:#e8f5e9; border:1px solid #c8e6c9; color:#155c3b; padding:6px 14px; border-radius:8px; font-size:12px; font-weight:600; cursor:pointer; transition:0.2s; display:flex; align-items:center; gap:6px; }
-            .btn-pdf:hover { background:#155c3b; color:#fff; border-color:#155c3b; }
+
+            .patient-card {
+              background: #fff;
+              border: 1px solid #eef4f1;
+              border-radius: 16px;
+              margin-bottom: 16px;
+              overflow: hidden;
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+              transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+              opacity: 0;
+              /* Hidden initially for animation */
+            }
+
+            .patient-card:hover {
+              box-shadow: 0 10px 30px rgba(21, 92, 59, 0.08);
+              transform: translateY(-2px);
+              border-color: #dbece5;
+              background: #fdfefe;
+            }
+
+            .pc-header {
+              padding: 20px 24px;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              cursor: pointer;
+              background: #fff;
+              transition: background 0.2s;
+            }
+
+            .pc-header:hover {
+              background: #f4f9f6;
+            }
+
+            .pc-name {
+              font-weight: 700;
+              font-size: 16px;
+              color: #155c3b;
+              letter-spacing: -0.3px;
+            }
+
+            .count-badge {
+              background: #e8f5e9;
+              color: #155c3b;
+              padding: 5px 12px;
+              border-radius: 20px;
+              font-weight: 600;
+              font-size: 12px;
+              transition: all 0.2s;
+              letter-spacing: 0.3px;
+            }
+
+            .count-badge:hover {
+              background: #155c3b;
+              color: #fff;
+              box-shadow: 0 2px 8px rgba(21, 92, 59, 0.2);
+            }
+
+            .last-date {
+              font-size: 13px;
+              color: #8fab9f;
+              font-weight: 500;
+              margin-right: 8px;
+            }
+
+            .toggle-icon {
+              font-size: 10px;
+              color: #155c3b;
+              transition: transform 0.3s ease;
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+              width: 24px;
+              height: 24px;
+              background: #eaf4ee;
+              border-radius: 50%;
+            }
+
+            .toggle-icon.rotated {
+              transform: rotate(180deg);
+              background: #155c3b;
+              color: #fff;
+            }
+
+            .pc-body {
+              padding: 24px;
+              border-top: 1px solid #f0f5f2;
+              background: #fff;
+              animation: fadeInScale 0.3s ease forwards;
+            }
+
+            .presc-grid {
+              display: grid;
+              grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+              gap: 20px;
+            }
+
+            .presc-card {
+              border: 1px solid #f0f0f0;
+              border-radius: 12px;
+              padding: 20px;
+              position: relative;
+              background: #fff;
+              transition: 0.2s;
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01);
+            }
+
+            .presc-card:hover {
+              border-color: #155c3b;
+              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            }
+
+            .presc-date {
+              font-size: 11px;
+              color: #999;
+              margin-bottom: 6px;
+              font-weight: 700;
+              text-transform: uppercase;
+              letter-spacing: 0.8px;
+            }
+
+            .presc-diag {
+              font-weight: 700;
+              color: #2c3e50;
+              margin-bottom: 12px;
+              font-size: 16px;
+            }
+
+            .presc-meds {
+              font-size: 14px;
+              color: #555;
+              line-height: 1.6;
+              margin-bottom: 16px;
+            }
+
+            .presc-med-item {
+              margin-bottom: 6px;
+              display: flex;
+              justify-content: space-between;
+              border-bottom: 1px dashed #f5f5f5;
+              padding-bottom: 4px;
+            }
+
+            .presc-med-item:last-child {
+              border-bottom: none;
+            }
+
+            .presc-actions {
+              display: flex;
+              justify-content: flex-end;
+              gap: 8px;
+              border-top: 1px solid #f5f5f5;
+              padding-top: 14px;
+              margin-top: 8px;
+            }
+
+            .btn-edit {
+              background: #fff;
+              border: 1px solid #e0e0e0;
+              color: #555;
+              padding: 6px 14px;
+              border-radius: 8px;
+              font-size: 12px;
+              font-weight: 600;
+              cursor: pointer;
+              transition: 0.2s;
+            }
+
+            .btn-edit:hover {
+              border-color: #155c3b;
+              color: #155c3b;
+              background: #f4f9f6;
+            }
+
+            .btn-pdf {
+              background: #e8f5e9;
+              border: 1px solid #c8e6c9;
+              color: #155c3b;
+              padding: 6px 14px;
+              border-radius: 8px;
+              font-size: 12px;
+              font-weight: 600;
+              cursor: pointer;
+              transition: 0.2s;
+              display: flex;
+              align-items: center;
+              gap: 6px;
+            }
+
+            .btn-pdf:hover {
+              background: #155c3b;
+              color: #fff;
+              border-color: #155c3b;
+            }
 
             /* Search Input Polish */
-            #presSearch:focus { border-color:#155c3b !important; box-shadow: 0 0 0 3px rgba(21,92,59,0.1) !important; transition: all 0.2s; }
+            #presSearch:focus {
+              border-color: #155c3b !important;
+              box-shadow: 0 0 0 3px rgba(21, 92, 59, 0.1) !important;
+              transition: all 0.2s;
+            }
 
             /* --- MEDICINE STOCK TAB STYLES --- */
-            .stock-layout, .stock-layout * { font-family: "Segoe UI", system-ui, sans-serif; }
-            .stock-layout { display: flex; flex-direction: column; gap: 24px; padding-top: 10px; }
-            .stock-categories { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
-            
+            .stock-layout,
+            .stock-layout * {
+              font-family: "Segoe UI", system-ui, sans-serif;
+            }
+
+            .stock-layout {
+              display: flex;
+              flex-direction: column;
+              gap: 24px;
+              padding-top: 10px;
+            }
+
+            .stock-categories {
+              display: flex;
+              gap: 12px;
+              margin-bottom: 24px;
+              flex-wrap: wrap;
+            }
+
             .stock-cat-pill {
-                padding: 10px 20px; background: #fff; border: 1px solid #eef4f1; border-radius: 12px;
-                color: #557062; font-weight: 500; font-size: 13.5px; cursor: pointer; transition: all 0.25s ease;
-                display: flex; align-items: center; gap: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+              padding: 10px 20px;
+              background: #fff;
+              border: 1px solid #eef4f1;
+              border-radius: 12px;
+              color: #557062;
+              font-weight: 500;
+              font-size: 13.5px;
+              cursor: pointer;
+              transition: all 0.25s ease;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
             }
-            .stock-cat-pill:hover { border-color: #bbcac1; color: #155c3b; transform: translateY(-1px); }
-            .stock-cat-pill.active { background: #155c3b; color: #fff; border-color: #155c3b; box-shadow: 0 4px 12px rgba(21,92,59,0.2); }
-            
-            .stock-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
-            
+
+            .stock-cat-pill:hover {
+              border-color: #bbcac1;
+              color: #155c3b;
+              transform: translateY(-1px);
+            }
+
+            .stock-cat-pill.active {
+              background: #155c3b;
+              color: #fff;
+              border-color: #155c3b;
+              box-shadow: 0 4px 12px rgba(21, 92, 59, 0.2);
+            }
+
+            .stock-grid {
+              display: grid;
+              grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+              gap: 16px;
+            }
+
             .med-stock-card {
-                background: #fff; border: 1px solid #f0f4f2; border-radius: 14px; padding: 16px 20px;
-                display: flex; justify-content: space-between; align-items: center;
-                transition: all 0.2s ease; box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-                border-left: 3px solid #e5ede9;
+              background: #fff;
+              border: 1px solid #f0f4f2;
+              border-radius: 14px;
+              padding: 16px 20px;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              transition: all 0.2s ease;
+              box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+              border-left: 3px solid #e5ede9;
             }
-            .med-stock-card:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.04); border-left-color: #155c3b; }
-            
-            .med-info { display: flex; flex-direction: column; gap: 2px; }
-            .med-name-label { font-weight: 500; color: #2c3e50; font-size: 14.5px; letter-spacing: -0.1px; }
-            .med-status-tag { font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px; padding: 2px 6px; border-radius: 4px; width: fit-content; margin-top: 2px; }
-            .status-tag-in { color: #2e7d32; background: #e8f5e9; border: 1px solid #c8e6c9; }
-            .status-tag-low { color: #b45309; background: #fffbeb; border: 1px solid #fef3c7; }
-            
-            .qty-display { display: flex; align-items: center; gap: 6px; }
-            .qty-value { 
-                font-size: 18px; font-weight: 600; color: #155c3b; min-width: 40px; text-align: right;
-                transition: color 0.3s ease;
+
+            .med-stock-card:hover {
+              transform: translateY(-2px);
+              box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+              border-left-color: #155c3b;
             }
-            .qty-unit { font-size: 11px; color: #8dab9c; font-weight: 400; text-transform: uppercase; margin-top: 3px; }
-            
+
+            .med-info {
+              display: flex;
+              flex-direction: column;
+              gap: 2px;
+            }
+
+            .med-name-label {
+              font-weight: 500;
+              color: #2c3e50;
+              font-size: 14.5px;
+              letter-spacing: -0.1px;
+            }
+
+            .med-status-tag {
+              font-size: 10px;
+              font-weight: 500;
+              text-transform: uppercase;
+              letter-spacing: 0.8px;
+              padding: 2px 6px;
+              border-radius: 4px;
+              width: fit-content;
+              margin-top: 2px;
+            }
+
+            .status-tag-in {
+              color: #2e7d32;
+              background: #e8f5e9;
+              border: 1px solid #c8e6c9;
+            }
+
+            .status-tag-low {
+              color: #b45309;
+              background: #fffbeb;
+              border: 1px solid #fef3c7;
+            }
+
+            .qty-display {
+              display: flex;
+              align-items: center;
+              gap: 6px;
+            }
+
+            .qty-value {
+              font-size: 18px;
+              font-weight: 600;
+              color: #155c3b;
+              min-width: 40px;
+              text-align: right;
+              transition: color 0.3s ease;
+            }
+
+            .qty-unit {
+              font-size: 11px;
+              color: #8dab9c;
+              font-weight: 400;
+              text-transform: uppercase;
+              margin-top: 3px;
+            }
+
             .low-stock-pulse {
-                animation: clinicalAmberPulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+              animation: clinicalAmberPulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
             }
-            
+
             @keyframes clinicalAmberPulse {
-                0% { color: #d97706; opacity: 1; }
-                50% { color: #f59e0b; opacity: 0.85; transform: scale(1.03); }
-                100% { color: #d97706; opacity: 1; }
+              0% {
+                color: #d97706;
+                opacity: 1;
+              }
+
+              50% {
+                color: #f59e0b;
+                opacity: 0.85;
+                transform: scale(1.03);
+              }
+
+              100% {
+                color: #d97706;
+                opacity: 1;
+              }
             }
-            
+
             .qty-changed {
-                animation: subtleHighlight 1.5s ease-out;
+              animation: subtleHighlight 1.5s ease-out;
             }
-            
+
             @keyframes subtleHighlight {
-                0% { background-color: rgba(21, 92, 59, 0.15); transform: scale(1.05); }
-                100% { background-color: transparent; transform: scale(1); }
+              0% {
+                background-color: rgba(21, 92, 59, 0.15);
+                transform: scale(1.05);
+              }
+
+              100% {
+                background-color: transparent;
+                transform: scale(1);
+              }
             }
           </style>
           <div class="appointments-header"
@@ -1429,7 +1736,8 @@
             <div class="appointments-header" style="margin-bottom:0px">
               <div>
                 <h3 style="color:#155c3b;margin-bottom:6px;font-weight:600">Inventory & Medicine Stock</h3>
-                <p style="font-size:13px;color:#4f6f60;margin:0">Monitoring stock levels and availability in real-time</p>
+                <p style="font-size:13px;color:#4f6f60;margin:0">Monitoring stock levels and availability in real-time
+                </p>
               </div>
             </div>
 
@@ -1448,9 +1756,9 @@
 
             <!-- MEDICINE LIST CONTAINER -->
             <div id="medicineGrid" class="stock-grid">
-               <!-- Cards will be injected here via loadStock -->
+              <!-- Cards will be injected here via loadStock -->
             </div>
-            
+
             <!-- Hidden original containers for compatibility if JS refers to them, 
                  but we will update JS to use medicineGrid primarily -->
             <div id="tablets" class="medicine-group" style="display:none"></div>
@@ -1524,70 +1832,74 @@
   <div class="modal" id="prescriptionModal">
     <div class="modal-content" style="width: 750px; max-width: 94%;">
       <form id="prescriptionForm" onsubmit="event.preventDefault(); savePrescription();">
-      <div class="patient-header" style="display:flex;align-items:center;gap:20px;">
-        <button type="button" onclick="closePresModal()"
-          style="background:#e8f5e9;border:none;width:40px;height:40px;border-radius:50%;font-size:20px;cursor:pointer;color:#155c3b;display:flex;align-items:center;justify-content:center;transition:0.2s;flex-shrink:0"
-          title="Back to Patient Drawer">←</button>
-        <div style="flex:1">
-          <h3 style="margin:0;line-height:1.2;font-size:20px">Create Prescription</h3>
-          <p id="presPatientName" style="color:#6b8a7a;font-size:14px;margin:0;margin-top:4px">Patient Name</p>
+        <div class="patient-header" style="display:flex;align-items:center;gap:20px;">
+          <button type="button" onclick="closePresModal()"
+            style="background:#e8f5e9;border:none;width:40px;height:40px;border-radius:50%;font-size:20px;cursor:pointer;color:#155c3b;display:flex;align-items:center;justify-content:center;transition:0.2s;flex-shrink:0"
+            title="Back to Patient Drawer">←</button>
+          <div style="flex:1">
+            <h3 style="margin:0;line-height:1.2;font-size:20px">Create Prescription</h3>
+            <p id="presPatientName" style="color:#6b8a7a;font-size:14px;margin:0;margin-top:4px">Patient Name</p>
+          </div>
+          <button type="button" onclick="closePresModal()" class="close-modal-x">✕</button>
         </div>
-        <button type="button" onclick="closePresModal()" class="close-modal-x">✕</button>
-      </div>
 
-      <div style="margin-bottom:16px">
-        <label style="display:block;font-size:12px;font-weight:600;color:#155c3b;margin-bottom:6px">Diagnosis</label>
-        <input type="text" id="presDiagnosis" placeholder="e.g. Chronic Migraine" required
-          style="width:100%;padding:10px;border-radius:10px;border:1px solid #ddd;outline:none">
-      </div>
-
-      <div id="medicationList" style="margin-bottom:16px">
-        <label style="display:block;font-size:12px;font-weight:600;color:#155c3b;margin-bottom:6px">Medicines</label>
-        <div id="presMedsContainer">
-          <!-- Medicine rows here -->
+        <div style="margin-bottom:16px">
+          <label style="display:block;font-size:12px;font-weight:600;color:#155c3b;margin-bottom:6px">Diagnosis</label>
+          <input type="text" id="presDiagnosis" placeholder="e.g. Chronic Migraine" required
+            style="width:100%;padding:10px;border-radius:10px;border:1px solid #ddd;outline:none">
         </div>
-        <button type="button" class="btn btn-outline" style="width:100%;margin-top:10px;font-size:12px" onclick="addMedRow()">+ Add
-          Medicine</button>
-      </div>
 
-      <div style="display:flex;gap:12px;margin-top:24px">
-        <button type="button" class="btn-outline" style="flex:1" onclick="closePresModal()">Cancel</button>
-        <button type="submit"
-          style="flex:2;background:#155c3b;color:#fff;border:none;border-radius:16px;cursor:pointer;font-weight:600">Save Prescription</button>
-      </div>
+        <div id="medicationList" style="margin-bottom:16px">
+          <label style="display:block;font-size:12px;font-weight:600;color:#155c3b;margin-bottom:6px">Medicines</label>
+          <div id="presMedsContainer">
+            <!-- Medicine rows here -->
+          </div>
+          <button type="button" class="btn btn-outline" style="width:100%;margin-top:10px;font-size:12px"
+            onclick="addMedRow()">+ Add
+            Medicine</button>
+        </div>
+
+        <div style="display:flex;gap:12px;margin-top:24px">
+          <button type="button" class="btn-outline" style="flex:1" onclick="closePresModal()">Cancel</button>
+          <button type="submit"
+            style="flex:2;background:#155c3b;color:#fff;border:none;border-radius:16px;cursor:pointer;font-weight:600">Save
+            Prescription</button>
+        </div>
       </form>
     </div>
   </div>
   <div class="modal" id="updateStockModal">
     <div class="modal-content" style="width: 400px; max-width: 94%;">
       <form id="updateStockForm" onsubmit="event.preventDefault(); saveStockUpdate();">
-      <div class="patient-header">
-        <div>
-          <h3>Update Stock</h3>
-          <p id="updateMedName" style="color:#6b8a7a;font-size:14px">Medicine Name</p>
+        <div class="patient-header">
+          <div>
+            <h3>Update Stock</h3>
+            <p id="updateMedName" style="color:#6b8a7a;font-size:14px">Medicine Name</p>
+          </div>
+          <button type="button" onclick="closeUpdateStockModal()" class="close-modal-x">✕</button>
         </div>
-        <button type="button" onclick="closeUpdateStockModal()" class="close-modal-x">✕</button>
-      </div>
 
-      <div style="margin-bottom:16px">
-        <label style="display:block;font-size:12px;font-weight:600;color:#155c3b;margin-bottom:6px">Current
-          Quantity</label>
-        <div id="updateCurrentQty"
-          style="font-size:18px;font-weight:700;color:#2c3e50;padding:10px;background:#f8fbf9;border-radius:10px">0
+        <div style="margin-bottom:16px">
+          <label style="display:block;font-size:12px;font-weight:600;color:#155c3b;margin-bottom:6px">Current
+            Quantity</label>
+          <div id="updateCurrentQty"
+            style="font-size:18px;font-weight:700;color:#2c3e50;padding:10px;background:#f8fbf9;border-radius:10px">0
+          </div>
         </div>
-      </div>
 
-      <div style="margin-bottom:16px">
-        <label style="display:block;font-size:12px;font-weight:600;color:#155c3b;margin-bottom:6px">New Quantity</label>
-        <input type="number" id="updateNewQty" placeholder="Enter quantity" min="0" required
-          style="width:100%;padding:10px;border-radius:10px;border:1px solid #ddd;outline:none">
-      </div>
+        <div style="margin-bottom:16px">
+          <label style="display:block;font-size:12px;font-weight:600;color:#155c3b;margin-bottom:6px">New
+            Quantity</label>
+          <input type="number" id="updateNewQty" placeholder="Enter quantity" min="0" required
+            style="width:100%;padding:10px;border-radius:10px;border:1px solid #ddd;outline:none">
+        </div>
 
-      <div style="display:flex;gap:12px;margin-top:24px">
-        <button type="button" class="btn-outline" style="flex:1" onclick="closeUpdateStockModal()">Cancel</button>
-        <button type="submit"
-          style="flex:2;background:#155c3b;color:#fff;border:none;border-radius:16px;cursor:pointer;font-weight:600">Save Changes</button>
-      </div>
+        <div style="display:flex;gap:12px;margin-top:24px">
+          <button type="button" class="btn-outline" style="flex:1" onclick="closeUpdateStockModal()">Cancel</button>
+          <button type="submit"
+            style="flex:2;background:#155c3b;color:#fff;border:none;border-radius:16px;cursor:pointer;font-weight:600">Save
+            Changes</button>
+        </div>
       </form>
     </div>
   </div>
@@ -1596,38 +1908,41 @@
   <div class="modal" id="scheduleModal">
     <div class="modal-content" style="width: 400px; max-width: 94%;">
       <form id="scheduleForm" onsubmit="event.preventDefault(); bookDoctorAppointment();">
-      <div class="patient-header" style="display:flex;align-items:center;gap:20px;">
-        <button type="button" onclick="closeScheduleModal()"
-          style="background:#e8f5e9;border:none;width:40px;height:40px;border-radius:50%;font-size:20px;cursor:pointer;color:#155c3b;display:flex;align-items:center;justify-content:center;transition:0.2s;flex-shrink:0"
-          title="Back to Patient Drawer">←</button>
-        <div style="flex:1">
-          <h3 style="margin:0;line-height:1.2;font-size:20px">Schedule Appointment</h3>
-          <p id="schedulePatientName" style="color:#6b8a7a;font-size:14px;margin:0;margin-top:4px">Patient Name</p>
+        <div class="patient-header" style="display:flex;align-items:center;gap:20px;">
+          <button type="button" onclick="closeScheduleModal()"
+            style="background:#e8f5e9;border:none;width:40px;height:40px;border-radius:50%;font-size:20px;cursor:pointer;color:#155c3b;display:flex;align-items:center;justify-content:center;transition:0.2s;flex-shrink:0"
+            title="Back to Patient Drawer">←</button>
+          <div style="flex:1">
+            <h3 style="margin:0;line-height:1.2;font-size:20px">Schedule Appointment</h3>
+            <p id="schedulePatientName" style="color:#6b8a7a;font-size:14px;margin:0;margin-top:4px">Patient Name</p>
+          </div>
+          <button type="button" onclick="closeScheduleModal()" class="close-modal-x">✕</button>
         </div>
-        <button type="button" onclick="closeScheduleModal()" class="close-modal-x">✕</button>
-      </div>
 
-      <div style="margin-bottom:16px">
-        <label style="display:block;font-size:12px;font-weight:600;color:#155c3b;margin-bottom:6px">Select Date</label>
-        <input type="date" id="bookDate" onchange="loadDoctorSlots(this.value)" required
-          style="width:100%;padding:10px;border-radius:10px;border:1px solid #ddd;outline:none">
-      </div>
-
-      <div style="margin-bottom:16px">
-        <label style="display:block;font-size:12px;font-weight:600;color:#155c3b;margin-bottom:6px">Select Time
-          Slot</label>
-        <div id="loadingSlots" style="display:none;color:#666;font-size:12px;margin-bottom:8px">Checking availability...
+        <div style="margin-bottom:16px">
+          <label style="display:block;font-size:12px;font-weight:600;color:#155c3b;margin-bottom:6px">Select
+            Date</label>
+          <input type="date" id="bookDate" onchange="loadDoctorSlots(this.value)" required
+            style="width:100%;padding:10px;border-radius:10px;border:1px solid #ddd;outline:none">
         </div>
-        <div class="slots-grid" id="slotContainer">
-          <div style="grid-column:1/-1;text-align:center;color:#888;font-size:13px">Select date first</div>
-        </div>
-      </div>
 
-      <div style="display:flex;gap:12px;margin-top:24px">
-        <button type="button" class="btn-outline" style="flex:1" onclick="closeScheduleModal()">Cancel</button>
-        <button type="submit"
-          style="flex:2;background:#155c3b;color:#fff;border:none;border-radius:16px;cursor:pointer;font-weight:600">Confirm Booking</button>
-      </div>
+        <div style="margin-bottom:16px">
+          <label style="display:block;font-size:12px;font-weight:600;color:#155c3b;margin-bottom:6px">Select Time
+            Slot</label>
+          <div id="loadingSlots" style="display:none;color:#666;font-size:12px;margin-bottom:8px">Checking
+            availability...
+          </div>
+          <div class="slots-grid" id="slotContainer">
+            <div style="grid-column:1/-1;text-align:center;color:#888;font-size:13px">Select date first</div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;margin-top:24px">
+          <button type="button" class="btn-outline" style="flex:1" onclick="closeScheduleModal()">Cancel</button>
+          <button type="submit"
+            style="flex:2;background:#155c3b;color:#fff;border:none;border-radius:16px;cursor:pointer;font-weight:600">Confirm
+            Booking</button>
+        </div>
       </form>
       <p id="bookMsg" style="text-align:center;color:#c62828;font-size:13px;margin-top:10px"></p>
     </div>
@@ -1670,7 +1985,7 @@
   <datalist id="medSuggestions"></datalist>
 
   <script>
-    const API = "https://hsm2.onrender.com";
+    const API = "https://hsm2-production.up.railway.app";
     const token = localStorage.getItem("token");
     const user = JSON.parse(localStorage.getItem("user") || "{}");
 
@@ -1961,11 +2276,11 @@
         if (apptRes.ok) {
           const list = await apptRes.json();
           const now = new Date();
-          
+
           const upcomingList = list.filter(a => {
             const st = (a.status || '').toLowerCase();
             if (st !== 'approved' && st !== 'confirmed') return false; // Rule 4: Strictly Approved/Confirmed only
-            
+
             const getFullDate = (item) => {
               const d = new Date(item.date);
               if (item.time) {
@@ -2116,8 +2431,8 @@
 
               // Filter total count to exclude Cancelled/Rejected for accuracy
               patient.totalAppointments = patientAppts.filter(a => {
-                  const s = (a.status || '').toLowerCase();
-                  return s !== 'cancelled' && s !== 'rejected';
+                const s = (a.status || '').toLowerCase();
+                return s !== 'cancelled' && s !== 'rejected';
               }).length;
 
               return patient;
@@ -2190,12 +2505,12 @@
       document.getElementById('presPatientName').innerText = name;
       document.getElementById('presDiagnosis').value = "";
       document.getElementById('presMedsContainer').innerHTML = "";
-      
+
       const modal = document.getElementById('prescriptionModal');
       modal.dataset.mode = 'create';
       delete modal.dataset.id;
       modal.querySelector('h3').innerText = "New Prescription";
-      
+
       addMedRow();
       modal.style.display = "flex";
     }
@@ -2217,13 +2532,13 @@
       const options = `
         <option value="">Select Medicine</option>
         <optgroup label="Tablets / Churna">
-          ${tablets.map(m => `<option value="${m.name}" ${data && (data.name===m.name || data.medicineName===m.name)?'selected':''}>${m.name}</option>`).join('')}
+          ${tablets.map(m => `<option value="${m.name}" ${data && (data.name === m.name || data.medicineName === m.name) ? 'selected' : ''}>${m.name}</option>`).join('')}
         </optgroup>
         <optgroup label="Asava / Kadha">
-          ${liquids.map(m => `<option value="${m.name}" ${data && (data.name===m.name || data.medicineName===m.name)?'selected':''}>${m.name}</option>`).join('')}
+          ${liquids.map(m => `<option value="${m.name}" ${data && (data.name === m.name || data.medicineName === m.name) ? 'selected' : ''}>${m.name}</option>`).join('')}
         </optgroup>
         <optgroup label="Oils / Syrups / Others">
-          ${others.map(m => `<option value="${m.name}" ${data && (data.name===m.name || data.medicineName===m.name)?'selected':''}>${m.name}</option>`).join('')}
+          ${others.map(m => `<option value="${m.name}" ${data && (data.name === m.name || data.medicineName === m.name) ? 'selected' : ''}>${m.name}</option>`).join('')}
         </optgroup>
       `;
 
@@ -2231,10 +2546,10 @@
         <select class="med-name" style="width:100%;min-width:0;padding:8px;border:1px solid #ddd;border-radius:8px;outline:none;font-size:13px;box-sizing:border-box">
           ${options}
         </select>
-        <input type="text" placeholder="Dose" value="${data ? (data.dose||data.dosage||'') : ''}" class="med-dose" required style="width:100%;min-width:0;padding:8px;border:1px solid #ddd;border-radius:8px;outline:none;font-size:13px;box-sizing:border-box">
-        <input type="number" placeholder="Days" value="${data ? (data.duration||'') : ''}" class="med-duration" min="1" required style="width:100%;min-width:0;padding:8px;border:1px solid #ddd;border-radius:8px;outline:none;font-size:13px;box-sizing:border-box">
-        <input type="number" placeholder="Qty" value="${data ? (data.qty||1) : ''}" class="med-qty" min="1" required style="width:100%;min-width:0;padding:8px;border:1px solid #ddd;border-radius:8px;outline:none;font-size:13px;box-sizing:border-box">
-        <input type="text" placeholder="Instructions" value="${data ? (data.instructions||'') : ''}" class="med-notes" style="width:100%;min-width:0;padding:8px;border:1px solid #ddd;border-radius:8px;outline:none;font-size:13px;box-sizing:border-box">
+        <input type="text" placeholder="Dose" value="${data ? (data.dose || data.dosage || '') : ''}" class="med-dose" required style="width:100%;min-width:0;padding:8px;border:1px solid #ddd;border-radius:8px;outline:none;font-size:13px;box-sizing:border-box">
+        <input type="number" placeholder="Days" value="${data ? (data.duration || '') : ''}" class="med-duration" min="1" required style="width:100%;min-width:0;padding:8px;border:1px solid #ddd;border-radius:8px;outline:none;font-size:13px;box-sizing:border-box">
+        <input type="number" placeholder="Qty" value="${data ? (data.qty || 1) : ''}" class="med-qty" min="1" required style="width:100%;min-width:0;padding:8px;border:1px solid #ddd;border-radius:8px;outline:none;font-size:13px;box-sizing:border-box">
+        <input type="text" placeholder="Instructions" value="${data ? (data.instructions || '') : ''}" class="med-notes" style="width:100%;min-width:0;padding:8px;border:1px solid #ddd;border-radius:8px;outline:none;font-size:13px;box-sizing:border-box">
         <button onclick="this.parentElement.remove()" style="background:none;border:none;color:#b71c1c;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center">✕</button>
       `;
       document.getElementById('presMedsContainer').appendChild(row);
@@ -2243,7 +2558,7 @@
     async function savePrescription() {
       const mode = document.getElementById('prescriptionModal').dataset.mode;
       const editId = document.getElementById('prescriptionModal').dataset.id;
-      
+
       const diagnosis = document.getElementById('presDiagnosis').value;
       const patientName = document.getElementById('presPatientName').innerText;
       const medRows = document.querySelectorAll('.med-row');
@@ -2268,21 +2583,21 @@
 
       // Check Stock logic (Skipped for Edit to allow returns/complex logic on backend)
       if (mode !== 'edit') {
-          for (const item of medicines) {
-            const stockItem = allMeds.find(m => m.name === item.name);
-            if (stockItem && stockItem.quantity < item.qty) {
-              window.showToast("error", `Insufficient stock for ${item.name}. Available: ${stockItem.quantity}`);
-              return;
-            }
+        for (const item of medicines) {
+          const stockItem = allMeds.find(m => m.name === item.name);
+          if (stockItem && stockItem.quantity < item.qty) {
+            window.showToast("error", `Insufficient stock for ${item.name}. Available: ${stockItem.quantity}`);
+            return;
           }
+        }
       }
 
       try {
         let url = API + "/api/prescriptions";
         let method = 'POST';
         if (mode === 'edit' && editId) {
-            url += "/" + editId;
-            method = 'PUT';
+          url += "/" + editId;
+          method = 'PUT';
         }
 
         const res = await fetch(url, {
@@ -2423,22 +2738,22 @@
         const data = await res.json();
         if (data.success) {
           window.showToast("success", "Patient deleted permanently");
-          
+
           // Auto-refresh all tabs after deletion
           closeDrawer();
           loadDashboard();
           loadPatients();
-          
+
           // Refresh prescriptions if visible or loaded
           if (document.getElementById('prescriptions').style.display !== 'none') {
             loadPrescriptions();
           }
-          
+
           // Refresh appointments if visible
           if (document.getElementById('appointments').style.display !== 'none') {
             renderDoctorAppointmentsTab(false);
           }
-          
+
         } else {
           window.showToast("error", data.message || "Failed to delete patient");
         }
@@ -2468,46 +2783,46 @@
         const r = await fetch(API + "/api/prescriptions", { headers: { Authorization: "Bearer " + token } });
         if (!r.ok) throw new Error("Failed");
         const data = await r.json();
-        
+
         const groups = {};
         data.forEach(p => {
-            if (p.patientId && !patientExists(p.patientId)) return; // Skip ghost data
+          if (p.patientId && !patientExists(p.patientId)) return; // Skip ghost data
 
-            const pid = p.patientId || p.patientName || 'unknown'; 
-            if(!groups[pid]) groups[pid] = {
-                id: p.patientId || '', 
-                name: p.patientName || 'Unknown',
-                lastDate: new Date(0),
-                count: 0,
-                list: []
-            };
-            groups[pid].list.push(p);
-            groups[pid].count++;
-            const d = new Date(p.createdAt || p.date);
-            if(d > groups[pid].lastDate) groups[pid].lastDate = d;
+          const pid = p.patientId || p.patientName || 'unknown';
+          if (!groups[pid]) groups[pid] = {
+            id: p.patientId || '',
+            name: p.patientName || 'Unknown',
+            lastDate: new Date(0),
+            count: 0,
+            list: []
+          };
+          groups[pid].list.push(p);
+          groups[pid].count++;
+          const d = new Date(p.createdAt || p.date);
+          if (d > groups[pid].lastDate) groups[pid].lastDate = d;
         });
 
-        const sortedGroups = Object.values(groups).filter(g => 
-            g.name.toLowerCase().includes(search)
-        ).sort((a,b) => b.lastDate - a.lastDate);
+        const sortedGroups = Object.values(groups).filter(g =>
+          g.name.toLowerCase().includes(search)
+        ).sort((a, b) => b.lastDate - a.lastDate);
 
         if (sortedGroups.length === 0) {
-            container.innerHTML = '<div style="text-align:center;padding:60px;color:#999;font-size:14px;">No prescriptions found.</div>';
-            return;
+          container.innerHTML = '<div style="text-align:center;padding:60px;color:#999;font-size:14px;">No prescriptions found.</div>';
+          return;
         }
 
         container.innerHTML = sortedGroups.map((g, i) => {
-            const rowId = `pbody-${i}`; 
-            const iconId = `picon-${i}`;
-            const delay = Math.min(i * 0.05, 0.5); // Cap delay
-            
-            return `
+          const rowId = `pbody-${i}`;
+          const iconId = `picon-${i}`;
+          const delay = Math.min(i * 0.05, 0.5); // Cap delay
+
+          return `
             <div class="patient-card" style="animation: slideInUp 0.4s ease forwards; animation-delay: ${delay}s">
                 <div class="pc-header" onclick="toggleAccordion('${rowId}', '${iconId}')">
                     <div class="pc-name">${g.name}</div>
                     <div style="display:flex;gap:12px;align-items:center">
                         <div class="count-badge">${g.count} Prescriptions</div>
-                        <div class="last-date">Last: ${g.lastDate.toLocaleDateString(undefined, {month:'short', day:'numeric'})}</div>
+                        <div class="last-date">Last: ${g.lastDate.toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}</div>
                         <div id="${iconId}" class="toggle-icon">▼</div>
                     </div>
                 </div>
@@ -2516,16 +2831,16 @@
                         <button onclick="openPresModal('${g.id}', '${g.name}')" style="background:#eaf4ee;color:#155c3b;border:none;padding:8px 20px;border-radius:20px;font-weight:700;font-size:12px;cursor:pointer;transition:all 0.2s;box-shadow:0 2px 6px rgba(0,0,0,0.05)">+ New Prescription</button>
                     </div>
                     <div class="presc-grid">
-                        ${g.list.sort((a,b) => new Date(b.createdAt||b.date) - new Date(a.createdAt||a.date)).map(p => {
-                            const dateStr = new Date(p.createdAt || p.date).toLocaleDateString(undefined, {year:'numeric', month:'short', day:'numeric'});
-                            const pJson = JSON.stringify(p).replace(/"/g, '&quot;');
-                            const medList = (p.medicines || []).map(m => `
+                        ${g.list.sort((a, b) => new Date(b.createdAt || b.date) - new Date(a.createdAt || a.date)).map(p => {
+            const dateStr = new Date(p.createdAt || p.date).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+            const pJson = JSON.stringify(p).replace(/"/g, '&quot;');
+            const medList = (p.medicines || []).map(m => `
                                 <div class="presc-med-item">
-                                    <span style="font-weight:600;color:#2c3e50">${m.name||m.medicineName}</span>
+                                    <span style="font-weight:600;color:#2c3e50">${m.name || m.medicineName}</span>
                                     <span style="color:#888;font-size:11px;font-weight:500">${m.qty}u • ${m.duration}d</span>
                                 </div>
                             `).join('');
-                            return `
+            return `
                             <div class="presc-card">
                                 <div class="presc-date">${dateStr}</div>
                                 <div class="presc-diag">${p.diagnosis || 'No Diagnosis'}</div>
@@ -2536,7 +2851,7 @@
                                 </div>
                             </div>
                             `;
-                        }).join('')}
+          }).join('')}
                     </div>
                 </div>
             </div>
@@ -2549,21 +2864,21 @@
     }
 
     function toggleAccordion(id, iconId) {
-        const el = document.getElementById(id);
-        const icon = document.getElementById(iconId);
-        if(el) {
-            const isHidden = el.style.display === 'none';
-            el.style.display = isHidden ? 'block' : 'none';
-            if(isHidden) {
-                el.style.animation = 'none';
-                el.offsetHeight; 
-                el.style.animation = 'fadeInScale 0.3s ease forwards';
-            }
+      const el = document.getElementById(id);
+      const icon = document.getElementById(iconId);
+      if (el) {
+        const isHidden = el.style.display === 'none';
+        el.style.display = isHidden ? 'block' : 'none';
+        if (isHidden) {
+          el.style.animation = 'none';
+          el.offsetHeight;
+          el.style.animation = 'fadeInScale 0.3s ease forwards';
         }
-        if(icon) {
-            if(el && el.style.display !== 'none') icon.classList.add('rotated');
-            else icon.classList.remove('rotated');
-        }
+      }
+      if (icon) {
+        if (el && el.style.display !== 'none') icon.classList.add('rotated');
+        else icon.classList.remove('rotated');
+      }
     }
 
     async function sendPrescriptionPDF(p, event) {
@@ -2584,7 +2899,7 @@
 
         const result = await sendRes.json();
         if (result.success) {
-            window.showToast("success", "Prescription successfully sent to patient.");
+          window.showToast("success", "Prescription successfully sent to patient.");
         } else throw new Error(result.message || "Failed to send email");
 
       } catch (e) {
@@ -2597,35 +2912,35 @@
 
 
     function openEditPrescription(p) {
-        if(!p) return;
-        currentPatientId = p.patientId;
-        document.getElementById('presPatientName').innerText = p.patientName;
-        document.getElementById('presDiagnosis').value = p.diagnosis;
-        document.getElementById('presMedsContainer').innerHTML = "";
-        
-        const modal = document.getElementById('prescriptionModal');
-        modal.dataset.mode = 'edit';
-        modal.dataset.id = p._id;
-        
-        // Find save button and change text? 
-        // Need to ensure savePrescription checks this dataset.
-        // Assuming save button text change logic in openPresModal reset.
-        
-        if(p.medicines && p.medicines.length > 0) {
-            p.medicines.forEach(m => {
-                addMedRow(m); // Modified addMedRow to accept data
-            });
-        } else {
-            addMedRow();
-        }
-        
-        modal.querySelector('h3').innerText = "Edit Prescription";
-        const btn = modal.querySelector('button[onclick="savePrescription()"]'); // Finding button might be hard without ID.
-        // I will add ID to the button in savePrescription replacement logic?
-        // Or i can find it via text? No.
-        // I'll rely on the user to see "Save" and it works.
-        
-        modal.style.display = "flex";
+      if (!p) return;
+      currentPatientId = p.patientId;
+      document.getElementById('presPatientName').innerText = p.patientName;
+      document.getElementById('presDiagnosis').value = p.diagnosis;
+      document.getElementById('presMedsContainer').innerHTML = "";
+
+      const modal = document.getElementById('prescriptionModal');
+      modal.dataset.mode = 'edit';
+      modal.dataset.id = p._id;
+
+      // Find save button and change text? 
+      // Need to ensure savePrescription checks this dataset.
+      // Assuming save button text change logic in openPresModal reset.
+
+      if (p.medicines && p.medicines.length > 0) {
+        p.medicines.forEach(m => {
+          addMedRow(m); // Modified addMedRow to accept data
+        });
+      } else {
+        addMedRow();
+      }
+
+      modal.querySelector('h3').innerText = "Edit Prescription";
+      const btn = modal.querySelector('button[onclick="savePrescription()"]'); // Finding button might be hard without ID.
+      // I will add ID to the button in savePrescription replacement logic?
+      // Or i can find it via text? No.
+      // I'll rely on the user to see "Save" and it works.
+
+      modal.style.display = "flex";
     }
 
     function viewPrescription(id) {
@@ -2879,12 +3194,12 @@
 
     async function loadStock(isPolling = false) {
       try {
-        const res = await fetch(API + "/api/medicines?_t=" + Date.now(), { 
-          headers: { Authorization: "Bearer " + token } 
+        const res = await fetch(API + "/api/medicines?_t=" + Date.now(), {
+          headers: { Authorization: "Bearer " + token }
         });
         if (!res.ok) return;
         const newMeds = await res.json();
-        
+
         // Populate Datalist for Prescriptions (keeping it for legacy if needed)
         const dl = document.getElementById('medSuggestions');
         if (dl) {
@@ -2900,28 +3215,28 @@
 
         // If grid is empty or not polling, do a full render
         if (!isPolling || !grid.children.length) {
-            renderStockGrid(activeStockCategory);
+          renderStockGrid(activeStockCategory);
         } else {
-            // Update quantities of visible medicines to avoid flicker
-            newMeds.filter(m => m.category === activeStockCategory).forEach(m => {
-                const card = document.getElementById(`med-card-${m._id}`);
-                if (card) {
-                    const qtyEl = card.querySelector('.qty-value');
-                    const oldQty = previousMedsMap.get(m._id);
-                    // Update only if changed
-                    if (oldQty !== undefined && Number(oldQty) !== Number(m.quantity)) {
-                        qtyEl.textContent = m.quantity;
-                        qtyEl.classList.add('qty-changed');
-                        setTimeout(() => qtyEl.classList.remove('qty-changed'), 1500);
-                        
-                        const isLow = m.quantity <= (m.alertLevel || 10);
-                        qtyEl.classList.toggle('low-stock-pulse', isLow);
-                        const statusTag = card.querySelector('.med-status-tag');
-                        statusTag.textContent = isLow ? 'Low Stock' : 'In Stock';
-                        statusTag.className = `med-status-tag ${isLow ? 'status-tag-low' : 'status-tag-in'}`;
-                    }
-                }
-            });
+          // Update quantities of visible medicines to avoid flicker
+          newMeds.filter(m => m.category === activeStockCategory).forEach(m => {
+            const card = document.getElementById(`med-card-${m._id}`);
+            if (card) {
+              const qtyEl = card.querySelector('.qty-value');
+              const oldQty = previousMedsMap.get(m._id);
+              // Update only if changed
+              if (oldQty !== undefined && Number(oldQty) !== Number(m.quantity)) {
+                qtyEl.textContent = m.quantity;
+                qtyEl.classList.add('qty-changed');
+                setTimeout(() => qtyEl.classList.remove('qty-changed'), 1500);
+
+                const isLow = m.quantity <= (m.alertLevel || 10);
+                qtyEl.classList.toggle('low-stock-pulse', isLow);
+                const statusTag = card.querySelector('.med-status-tag');
+                statusTag.textContent = isLow ? 'Low Stock' : 'In Stock';
+                statusTag.className = `med-status-tag ${isLow ? 'status-tag-low' : 'status-tag-in'}`;
+              }
+            }
+          });
         }
       } catch (e) { console.error(e); }
     }
@@ -2935,7 +3250,7 @@
 
     function renderStockGrid(category) {
       let meds = allMeds.filter(m => m.category === category);
-      
+
       // Sort: Low stock items first
       meds.sort((a, b) => {
         const isALow = a.quantity <= (a.alertLevel || 10);
@@ -2947,7 +3262,7 @@
 
       const container = document.getElementById('medicineGrid');
       if (!container) return;
-      
+
       container.innerHTML = meds.map(m => {
         const isLow = m.quantity <= (m.alertLevel || 10);
         return `
@@ -2970,26 +3285,26 @@
     // Initialize Polling
     if (stockPollInterval) clearInterval(stockPollInterval);
     stockPollInterval = setInterval(() => {
-        const section = document.getElementById('stock');
-        if (section && section.style.display !== 'none') {
-            loadStock(true);
-        }
+      const section = document.getElementById('stock');
+      if (section && section.style.display !== 'none') {
+        loadStock(true);
+      }
     }, 25000);
 
     window.addEventListener('focus', () => {
-        const section = document.getElementById('stock');
-        if (section && section.style.display !== 'none') {
-            loadStock(true);
-        }
+      const section = document.getElementById('stock');
+      if (section && section.style.display !== 'none') {
+        loadStock(true);
+      }
     });
 
     function openCategory(id) {
-       // Support for any legacy calls, redirect to new system
-       const pillMap = { 'tablets': 0, 'liquids': 1, 'others': 2 };
-       const pills = document.querySelectorAll('.stock-cat-pill');
-       if (pills[pillMap[id]]) {
-           switchStockCategory(id, pills[pillMap[id]]);
-       }
+      // Support for any legacy calls, redirect to new system
+      const pillMap = { 'tablets': 0, 'liquids': 1, 'others': 2 };
+      const pills = document.querySelectorAll('.stock-cat-pill');
+      if (pills[pillMap[id]]) {
+        switchStockCategory(id, pills[pillMap[id]]);
+      }
     }
 
 
@@ -3020,15 +3335,15 @@
 
       const currentQty = Number(document.getElementById('updateCurrentQty').innerText);
       if (newQty === currentQty) {
-          return window.showToast("warning", "No change in quantity detected.");
+        return window.showToast("warning", "No change in quantity detected.");
       }
 
       const btn = document.querySelector('#updateStockModal button[type="submit"]');
       let loadText = "Save Changes";
       if (btn) {
-          loadText = btn.innerText;
-          btn.innerText = "Updating...";
-          btn.disabled = true;
+        loadText = btn.innerText;
+        btn.innerText = "Updating...";
+        btn.disabled = true;
       }
 
       try {
@@ -3064,13 +3379,13 @@
         } else {
           window.showToast("error", "Error: " + (data.message || "Failed to update stock"));
         }
-      } catch (e) { 
+      } catch (e) {
         console.error(e);
         window.showToast("error", "Server communication failed.");
       } finally {
         if (btn) {
-           btn.innerText = loadText;
-           btn.disabled = false;
+          btn.innerText = loadText;
+          btn.disabled = false;
         }
       }
     }
@@ -3080,7 +3395,7 @@
 
 
     dashboardDate.innerText = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-    
+
     (async () => {
       await loadDashboard();
       await loadPatients();
@@ -3170,11 +3485,14 @@
   </script>
 
   <!-- Prescription PDF Template (Hidden) -->
-  <div id="prescription-pdf-template" style="position: absolute; left: -9999px; top: -9999px; width: 794px; padding: 50px; font-family: 'Segoe UI', Arial, sans-serif; background: #ffffff; color: #333; line-height: 1.4;">
-    
+  <div id="prescription-pdf-template"
+    style="position: absolute; left: -9999px; top: -9999px; width: 794px; padding: 50px; font-family: 'Segoe UI', Arial, sans-serif; background: #ffffff; color: #333; line-height: 1.4;">
+
     <!-- Professional Watermark Logo -->
-    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; z-index: 0; pointer-events: none;">
-      <img src="assets/logo.png" style="width: 450px; height: 450px; opacity: 0.07; filter: blur(1.5px); object-fit: contain;">
+    <div
+      style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; z-index: 0; pointer-events: none;">
+      <img src="assets/logo.png"
+        style="width: 450px; height: 450px; opacity: 0.07; filter: blur(1.5px); object-fit: contain;">
     </div>
 
     <!-- MAIN CONTENT LAYER -->
@@ -3187,9 +3505,15 @@
               <div style="display: flex; align-items: center; gap: 20px;">
                 <img src="assets/logo.png" style="width: 85px; height: 85px; object-fit: contain;">
                 <div style="border-left: 3px solid #155c3b; padding-left: 20px;">
-                  <h1 style="margin:0; color:#155c3b; font-size: 32px; font-weight: 900; letter-spacing: 0.5px; text-transform: uppercase;">Samyak</h1>
-                  <h2 style="margin:0; color:#155c3b; font-size: 18px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;">Ayurvedic Hospital</h2>
-                  <p style="margin:5px 0 0 0; font-size:11px; color: #4f6f60; font-weight: 600; text-transform: uppercase;">Pure Ayurvedic Treatment & Research Center</p>
+                  <h1
+                    style="margin:0; color:#155c3b; font-size: 32px; font-weight: 900; letter-spacing: 0.5px; text-transform: uppercase;">
+                    Samyak</h1>
+                  <h2
+                    style="margin:0; color:#155c3b; font-size: 18px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;">
+                    Ayurvedic Hospital</h2>
+                  <p
+                    style="margin:5px 0 0 0; font-size:11px; color: #4f6f60; font-weight: 600; text-transform: uppercase;">
+                    Pure Ayurvedic Treatment & Research Center</p>
                 </div>
               </div>
             </td>
@@ -3204,15 +3528,18 @@
       </div>
 
       <!-- PATIENT INFO -->
-      <div style="background: #f3f8f5; border: 1px solid #e8f5e9; padding: 20px; border-radius: 12px; margin-bottom: 25px;">
+      <div
+        style="background: #f3f8f5; border: 1px solid #e8f5e9; padding: 20px; border-radius: 12px; margin-bottom: 25px;">
         <table width="100%" style="font-size:14px; border-collapse: collapse;">
           <tr>
-            <td style="padding: 6px 0;"><strong>PATIENT NAME :</strong> <span id="pdf-patient-name" style="color:#155c3b; font-weight:700;"></span></td>
+            <td style="padding: 6px 0;"><strong>PATIENT NAME :</strong> <span id="pdf-patient-name"
+                style="color:#155c3b; font-weight:700;"></span></td>
             <td align="right" style="padding: 6px 0;"><strong>DATE :</strong> <span id="pdf-date"></span></td>
           </tr>
           <tr>
             <td style="padding: 6px 0;"><strong>AGE / GENDER :</strong> <span id="pdf-age-gender"></span></td>
-            <td align="right" style="padding: 6px 0;"><strong>UHID :</strong> <span id="pdf-uhid" style="font-family: monospace;"></span></td>
+            <td align="right" style="padding: 6px 0;"><strong>UHID :</strong> <span id="pdf-uhid"
+                style="font-family: monospace;"></span></td>
           </tr>
         </table>
       </div>
@@ -3221,9 +3548,11 @@
       <div style="margin-bottom: 25px;">
         <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
           <div style="width: 4px; height: 16px; background: #155c3b;"></div>
-          <strong style="color: #155c3b; text-transform: uppercase; font-size: 13px; letter-spacing: 1px;">Diagnosis / Complaints</strong>
+          <strong style="color: #155c3b; text-transform: uppercase; font-size: 13px; letter-spacing: 1px;">Diagnosis /
+            Complaints</strong>
         </div>
-        <div style="border:1px solid #d1fae5; padding:15px; border-radius: 8px; font-size: 14px; min-height: 50px; color: #2c3e50; background: rgba(255,255,255,0.6);">
+        <div
+          style="border:1px solid #d1fae5; padding:15px; border-radius: 8px; font-size: 14px; min-height: 50px; color: #2c3e50; background: rgba(255,255,255,0.6);">
           <span id="pdf-diagnosis"></span>
         </div>
       </div>
@@ -3231,10 +3560,11 @@
       <!-- MEDICINES -->
       <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
         <div style="width: 4px; height: 16px; background: #155c3b;"></div>
-        <strong style="color: #155c3b; text-transform: uppercase; font-size: 13px; letter-spacing: 1px;">Prescription (Rx)</strong>
+        <strong style="color: #155c3b; text-transform: uppercase; font-size: 13px; letter-spacing: 1px;">Prescription
+          (Rx)</strong>
       </div>
       <table width="100%" border="1" cellspacing="0" cellpadding="12"
-             style="border-collapse:collapse; font-size:14px; border: 1px solid #eef4f1; border-radius: 8px; overflow: hidden; background: rgba(255,255,255,0.7);">
+        style="border-collapse:collapse; font-size:14px; border: 1px solid #eef4f1; border-radius: 8px; overflow: hidden; background: rgba(255,255,255,0.7);">
         <thead style="background:#155c3b; color: #ffffff;">
           <tr>
             <th align="left" style="border: 1px solid #155c3b;">Medicine Name</th>
@@ -3254,11 +3584,13 @@
             <p>✔ Avoid spicy and heavy food during treatment.</p>
           </div>
           <div style="text-align:center; min-width: 180px;">
-            <div style="margin-bottom: 15px; color: #f0f0f0; font-size: 10px; border-bottom: 1px solid #eee;">[Digitally Signed]</div>
+            <div style="margin-bottom: 15px; color: #f0f0f0; font-size: 10px; border-bottom: 1px solid #eee;">[Digitally
+              Signed]</div>
             <strong style="color: #155c3b; font-size: 15px;">Dr. Rajan Karangiya</strong>
           </div>
         </div>
-        <div style="margin-top:40px; border-top:2px solid #155c3b; padding-top:15px; font-size:11px; text-align: center; color: #6b8a7a; letter-spacing: 0.5px;">
+        <div
+          style="margin-top:40px; border-top:2px solid #155c3b; padding-top:15px; font-size:11px; text-align: center; color: #6b8a7a; letter-spacing: 0.5px;">
           Address: 39/2/03/2, LMCTRC Nagar, Moti Palace Township, Junagadh, Gujarat – 362015
         </div>
       </div>

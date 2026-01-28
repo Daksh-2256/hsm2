@@ -8,7 +8,7 @@ module.exports = async (email, token, host) => {
   // Point directly to the file since we are serving frontend at root
   const link = `${baseUrl}/activate.html?token=${token}&email=${email}`;
 
-  await transporter.sendMail({
+  const mailOptions = {
     from: `"Samyak Hospital" <${process.env.EMAIL_USER}>`,
     to: email,
     subject: "Activate Your Patient Account",
@@ -20,6 +20,12 @@ module.exports = async (email, token, host) => {
       <a href="${link}" style="display:inline-block;padding:10px 20px;background:#155c3b;color:#fff;text-decoration:none;border-radius:5px;font-weight:bold;">Activate Account</a>
       <p style="margin-top:20px;font-size:12px;color:#666;">This link expires in 24 hours.</p>
     `
-  });
+  };
+
+  // Timeout race
+  await Promise.race([
+    transporter.sendMail(mailOptions),
+    new Promise((_, reject) => setTimeout(() => reject(new Error("Activation email sending timed out (10s).")), 10000))
+  ]);
   console.log("Activation email sent to " + email);
 };

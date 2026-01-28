@@ -539,7 +539,12 @@ router.post("/invite", auth, async (req, res) => {
       await sendActivation(email, token, req.headers.host);
       res.json({ success: true, message: "Invitation sent" });
     } catch (e) {
-      res.status(500).json({ success: false, message: "Failed to send email" });
+      console.error("Invite Email Error:", e);
+      // Return success false but mention the patient was created
+      res.status(500).json({
+        success: false,
+        message: "Patient created, but failed to send email. " + (e.message || "Email server error.")
+      });
     }
 
   } catch (e) {

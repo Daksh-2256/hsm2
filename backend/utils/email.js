@@ -21,7 +21,13 @@ transporter.verify((error, success) => {
 });
 
 // Wrapper function for sending emails with better logging
-transporter.sendMailWithLog = async (mailOptions) => {
+const originalSendMail = transporter.sendMail.bind(transporter);
+transporter.sendMail = async (mailOptions) => {
+  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+    console.error("❌ Email credentials missing. Cannot send email.");
+    throw new Error("Email credentials missing on server. Please configure EMAIL_USER and EMAIL_PASS in Railway variables.");
+  }
+
   // Ensure proper headers for deliverability
   const enhancedOptions = {
     ...mailOptions,
@@ -34,17 +40,14 @@ transporter.sendMailWithLog = async (mailOptions) => {
   };
 
   try {
-    const info = await transporter.sendMail(enhancedOptions);
+    const info = await originalSendMail(enhancedOptions);
     console.log("📧 Email sent successfully:");
     console.log("   To:", enhancedOptions.to);
     console.log("   Subject:", enhancedOptions.subject);
-    console.log("   MessageId:", info.messageId);
-    console.log("   Response:", info.response);
     return info;
   } catch (err) {
     console.error("❌ Email send FAILED:");
     console.error("   To:", enhancedOptions.to);
-    console.error("   Subject:", enhancedOptions.subject);
     console.error("   Error:", err.message);
     throw err;
   }

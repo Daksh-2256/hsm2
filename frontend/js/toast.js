@@ -3,7 +3,7 @@
  * Subsystem for smooth feedback, reversibility (UNDO), audio cues, and click-to-dismiss.
  */
 
-(function() {
+(function () {
   const ToastSystem = {
     container: null,
     enableToastSound: true,
@@ -137,8 +137,8 @@
         // Short, unobtrusive notification sound
         const audio = new Audio(this.sounds[type]);
         audio.volume = 0.15; // Soft volume
-        audio.play().catch(() => {}); // Catch-all for browser interaction rules
-      } catch (e) {}
+        audio.play().catch(() => { }); // Catch-all for browser interaction rules
+      } catch (e) { }
     },
 
     show(type, message, options = {}) {
@@ -148,9 +148,9 @@
       const toast = document.createElement('div');
       toast.className = `toast toast-${type}`;
       toast.style.setProperty('--duration', `${duration}ms`);
-      
+
       const icons = { success: '✅', error: '❌', warning: '⚠️', info: 'ℹ️' };
-      
+
       let html = `
         <span class="toast-icon">${icons[type] || '🔔'}</span>
         <div class="toast-content">${message}</div>
@@ -197,7 +197,7 @@
     console.groupEnd();
 
     let userMsg = "Something went wrong. Please try again.";
-    
+
     if (error.status === 401) {
       userMsg = "Session expired. Please login again.";
       setTimeout(() => window.location.href = 'login.html', 2000);
@@ -209,8 +209,11 @@
       userMsg = "Item not found.";
     } else if (!navigator.onLine) {
       userMsg = "Unable to connect to server. Check your internet.";
+    } else if (error.message && error.message.length < 100) {
+      // Use the actual error message if it's reasonably short/readable
+      userMsg = error.message;
     }
-    
+
     window.showToast('error', userMsg);
   };
 

@@ -200,8 +200,14 @@
                 });
 
                 if (!res.ok) {
-                    const txt = await res.text();
-                    throw new Error(`Server ${res.status}: ${txt}`);
+                    let errorMessage = `Server Error (${res.status})`;
+                    try {
+                        const errData = await res.json();
+                        if (errData.message) errorMessage = errData.message;
+                    } catch (parseErr) {
+                        errorMessage = await res.text();
+                    }
+                    throw new Error(errorMessage);
                 }
 
                 const d = await res.json();

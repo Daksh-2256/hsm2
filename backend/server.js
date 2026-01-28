@@ -21,6 +21,10 @@ app.use(express.urlencoded({
 app.use(passport.initialize());
 app.use(require('cors')());
 
+// Serve Static Frontend
+const path = require('path');
+app.use(express.static(path.join(__dirname, '../frontend')));
+
 // Routes
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/auth", require("./routes/googleAuth"));

@@ -11,6 +11,9 @@ const transporter = nodemailer.createTransport({
 // Verify transporter on startup
 transporter.verify((error, success) => {
   if (error) {
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+      console.error("❌ CRITICAL: EMAIL_USER or EMAIL_PASS environment variables are MISSING.");
+    }
     console.error("❌ Email transporter verification FAILED:", error.message);
   } else {
     console.log("✅ Email transporter is ready to send messages");

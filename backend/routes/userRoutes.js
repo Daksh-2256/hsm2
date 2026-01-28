@@ -182,6 +182,10 @@ router.post("/register-init", async (req, res) => {
       await sendOtp(email, otp);
     } catch (e) {
       console.error("Failed to send OTP:", e);
+      return res.json({
+        success: false,
+        message: "Failed to send OTP. Email configuration may be missing or invalid."
+      });
     }
 
     res.json({
@@ -297,6 +301,7 @@ router.post("/resend-otp", async (req, res) => {
       await sendOtp(email, otp);
     } catch (e) {
       console.error("Failed to send OTP:", e);
+      return res.json({ success: false, message: "Failed to send OTP. Email configuration issue." });
     }
 
     res.json({
@@ -591,7 +596,7 @@ router.post("/send-activation-otp", async (req, res) => {
     res.json({ success: true, message: "OTP sent to email." });
   } catch (e) {
     console.error(e);
-    res.status(500).json({ success: false, message: "Server error" });
+    res.status(500).json({ success: false, message: "Failed to send OTP. Email configuration issue." });
   }
 });
 

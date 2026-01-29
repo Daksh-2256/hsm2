@@ -601,7 +601,8 @@ router.post("/send-activation-otp", async (req, res) => {
     res.json({ success: true, message: "OTP sent to email." });
   } catch (e) {
     console.error(e);
-    res.status(500).json({ success: false, message: "Failed to send OTP. Email configuration issue." });
+    // Send specific error to frontend so the user knows what's wrong (e.g. Invalid Login)
+    res.status(500).json({ success: false, message: "Failed to send OTP: " + (e.message || "Unknown error") });
   }
 });
 

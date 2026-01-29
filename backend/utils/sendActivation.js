@@ -31,7 +31,7 @@ module.exports = async (email, token, host) => {
     // Timeout race
     await Promise.race([
       transporter.sendMail(mailOptions),
-      new Promise((_, reject) => setTimeout(() => reject(new Error("Activation email sending timed out (10s).")), 10000))
+      new Promise((_, reject) => setTimeout(() => reject(new Error("Activation email sending timed out (25s). Check credentials.")), 25000))
     ]);
     console.log("[sendActivation] Activation email sent successfully to " + email);
   } catch (error) {

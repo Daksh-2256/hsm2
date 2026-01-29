@@ -1,10 +1,15 @@
 const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true, // Use SSL
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
+  },
+  tls: {
+    rejectUnauthorized: false
   }
 });
 
@@ -13,6 +18,8 @@ transporter.verify((error, success) => {
   if (error) {
     if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
       console.error("❌ CRITICAL: EMAIL_USER or EMAIL_PASS environment variables are MISSING.");
+      console.error("EMAIL_USER:", process.env.EMAIL_USER ? "Provided" : "Missing");
+      console.error("EMAIL_PASS:", process.env.EMAIL_PASS ? "Provided" : "Missing");
     }
     console.error("❌ Email transporter verification FAILED:", error.message);
   } else {

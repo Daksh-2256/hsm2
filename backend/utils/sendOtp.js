@@ -20,7 +20,7 @@ module.exports = async (email, otp) => {
     // Timeout race to prevent hanging
     const sendEmailPromise = transporter.sendMail(mailOptions);
     const timeoutPromise = new Promise((_, reject) =>
-      setTimeout(() => reject(new Error("Email sending timed out (10s). Check server credentials.")), 10000)
+      setTimeout(() => reject(new Error("Email sending timed out (25s). Check internet connection or server credentials.")), 25000)
     );
 
     await Promise.race([sendEmailPromise, timeoutPromise]);

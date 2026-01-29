@@ -1,33 +1,25 @@
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 
-const transporter = require("./email");
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 module.exports = async (email, otp) => {
-  console.log(`[sendOtp] Sending OTP ${otp} to ${email}`);
-  const mailOptions = {
-    from: `"Samyak Hospital" <${process.env.EMAIL_USER}>`,
-    to: email,
-    subject: "Your OTP Verification Code",
-    html: `
-      <h2>OTP Verification</h2>
-      <p>Your OTP is:</p>
-      <h1>${otp}</h1>
-      <p>Valid for 5 minutes.</p>
-    `
-  };
+  console.log("Sending OTP via Resend:", otp);
 
   try {
-    // Timeout race to prevent hanging
-    const sendEmailPromise = transporter.sendMail(mailOptions);
-    const timeoutPromise = new Promise((_, reject) =>
-      setTimeout(() => reject(new Error("Email sending timed out (25s). Check internet connection or server credentials.")), 25000)
-    );
+    await resend.emails.send({
+      from: "Samyak Hospital <onboarding@resend.dev>",
+      to: email,
+      subject: "Your OTP Code",
+      html: `
+        <h2>Samyak Ayurvedic Hospital</h2>
+        <h1>Your OTP is: ${otp}</h1>
+        <p>Valid for 5 minutes.</p>
+      `
+    });
 
-    await Promise.race([sendEmailPromise, timeoutPromise]);
-    console.log(`[sendOtp] OTP sent successfully to ${email}`);
-  } catch (error) {
-    console.error(`[sendOtp] Failed to send OTP to ${email}:`, error.message);
-    throw error;
+    console.log("OTP sent successfully");
+  } catch (err) {
+    console.error("Resend Error:", err);
+    throw err;
   }
 };
-// OTP sender utility — sends an email using configured transporter

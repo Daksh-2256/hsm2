@@ -15,6 +15,20 @@ const transporter = nodemailer.createTransport({
   }
 });
 
+const { Resend } = require("resend");
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+async function sendActivationEmail(user) {
+  await resend.emails.send({
+    from: "Hospital <onboarding@resend.dev>",
+    to: user.email,
+    subject: "Activate your account",
+    html: `<h2>Activate</h2><a href="${process.env.FRONTEND_URL}/activate.html?email=${user.email}">Click Here</a>`
+  });
+}
+
+module.exports = sendActivationEmail;
+
 // Force the use of IPv4 if not automatically handled by service
 transporter.set('proxy_socks_module', require('http')); // unrelated, just ensuring clear slate
 

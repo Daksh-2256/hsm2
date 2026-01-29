@@ -624,10 +624,17 @@ router.post("/activate", async (req, res) => {
       // OTP Flow
       user = await User.findOne({ email });
       if (!user) return res.json({ success: false, message: "No patient record found. Please contact clinic." });
+
+      console.log(`[ACTIVATE_DEBUG] User found: ${email}`);
+      console.log(`[ACTIVATE_DEBUG] Input OTP: '${otp}', Type: ${typeof otp}`);
+      console.log(`[ACTIVATE_DEBUG] DB OTP: '${user.otp}', Type: ${typeof user.otp}`);
+      console.log(`[ACTIVATE_DEBUG] Expiry: ${user.otpExpiry}, Now: ${Date.now()}, IsExpired: ${Date.now() > user.otpExpiry}`);
+
       // Allow re-activation to fix potential password issues
       // if (user.isAccountActivated) return res.json({ success: false, message: "Account already activated. Please login." });
 
-      if (!user.otp || !user.otpExpiry || Date.now() > user.otpExpiry || user.otp !== otp) {
+      if (!user.otp || !user.otpExpiry || Date.now() > user.otpExpiry || String(user.otp).trim() !== String(otp).trim()) {
+        console.log(`[ACTIVATE_DEBUG] Validation Failed`);
         return res.json({ success: false, message: "Invalid or expired activation details. Please try again." });
       }
     } else {

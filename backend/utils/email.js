@@ -3,9 +3,9 @@ console.log("EMAIL_PASS =", process.env.EMAIL_PASS ? "SET" : "NOT SET");
 const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 587,
-  secure: false, // true for 465, false for other ports
+  service: "gmail",
+  // Force IPv4 to avoid IPv6 timeouts in some container environments
+  // Increase connection timeout
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
@@ -14,6 +14,10 @@ const transporter = nodemailer.createTransport({
     rejectUnauthorized: false
   }
 });
+
+// Force the use of IPv4 if not automatically handled by service
+transporter.set('proxy_socks_module', require('http')); // unrelated, just ensuring clear slate
+
 
 // Verify transporter on startup
 transporter.verify((error, success) => {

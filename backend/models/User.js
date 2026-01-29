@@ -19,16 +19,25 @@ const UserSchema = new mongoose.Schema({
   activationTokenExpiry: Number
 });
 
-// Hash password before save (only if modified and not a Google user)
+
+// HASH PASSWORD ON SAVE
 UserSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
   if (!this.password) return next();
-  try {
-    this.password = await bcrypt.hash(this.password, 10);
-    next();
-  } catch (err) {
-    next(err);
+
+  console.log("🔐 HASHING PASSWORD...");
+  this.password = await bcrypt.hash(this.password, 10);
+  next();
+});
+
+
+// 🔥 VERY IMPORTANT: HASH PASSWORD ON UPDATE
+UserSchema.pre("findOneAndUpdate", async function(next) {
+  if (this._update.password) {
+    console.log("🔐 HASHING PASSWORD (findOneAndUpdate)");
+    this._update.password = await bcrypt.hash(this._update.password, 10);
   }
+  next();
 });
 
 module.exports = mongoose.model("User", UserSchema);

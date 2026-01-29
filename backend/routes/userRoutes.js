@@ -552,6 +552,43 @@ router.post("/invite", auth, async (req, res) => {
     res.status(500).json({ success: false, message: "Server error" });
   }
 });
+router.post("/activate", async (req, res) => {
+  try {
+    const { email, otp, password } = req.body;
+
+    const user = await User.findOne({ email });
+    if (!user) return res.json({ success: false, message: "User not found" });
+
+    if (!user.otp || !user.otpExpiry) {
+      return res.json({ success: false, message: "OTP not requested" });
+    }
+
+    if (Date.now() > user.otpExpiry) {
+      return res.json({ success: false, message: "OTP expired" });
+    }
+
+    if (String(user.otp) !== String(otp)) {
+      return res.json({ success: false, message: "Invalid OTP" });
+    }
+
+    // Save password (hash auto)
+    user.password = password;
+    user.isAccountActivated = true;
+    user.isVerified = true;
+    user.otp = undefined;
+    user.otpExpiry = undefined;
+
+    await user.save(); // IMPORTANT
+
+    console.log("✅ ACTIVATED:", email);
+
+    res.json({ success: true, message: "Account activated successfully" });
+
+  } catch (err) {
+    console.error("ACTIVATE ERROR:", err);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
 
 // 2. RESEND ACTIVATION (Doctor Action - Token Based re-send)
 router.post("/resend-activation", auth, async (req, res) => {

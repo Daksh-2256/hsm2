@@ -2,11 +2,16 @@ const nodemailer = require("nodemailer");
 const transporter = require("./email");
 
 module.exports = async (email, token, host) => {
+  console.log(`[sendActivation] Attempting to send activation email to: ${email}`);
+
   // Construct activation link (Assuming standard Live Server port 5500 or similar)
   // Adjust path based on where frontend files are served
   const baseUrl = process.env.FRONTEND_URL || 'https://hsm2-production.up.railway.app';
+  console.log(`[sendActivation] Base URL resolved to: ${baseUrl}`);
+
   // Point directly to the file since we are serving frontend at root
   const link = `${baseUrl}/activate.html?token=${token}&email=${email}`;
+  console.log(`[sendActivation] Activation link: ${link}`);
 
   const mailOptions = {
     from: `"Samyak Hospital" <${process.env.EMAIL_USER}>`,
@@ -22,10 +27,15 @@ module.exports = async (email, token, host) => {
     `
   };
 
-  // Timeout race
-  await Promise.race([
-    transporter.sendMail(mailOptions),
-    new Promise((_, reject) => setTimeout(() => reject(new Error("Activation email sending timed out (10s).")), 10000))
-  ]);
-  console.log("Activation email sent to " + email);
+  try {
+    // Timeout race
+    await Promise.race([
+      transporter.sendMail(mailOptions),
+      new Promise((_, reject) => setTimeout(() => reject(new Error("Activation email sending timed out (10s).")), 10000))
+    ]);
+    console.log("[sendActivation] Activation email sent successfully to " + email);
+  } catch (error) {
+    console.error(`[sendActivation] Error sending email to ${email}:`, error.message);
+    throw error;
+  }
 };
